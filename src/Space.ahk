@@ -6,7 +6,7 @@
 
     /*
         space + qweasdzxc
-        this hot key is moves mouse pointer to edge of activated window
+        moves mouse pointer to edge of activated window
         
         q : left top
         w : center top

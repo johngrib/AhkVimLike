@@ -3,14 +3,14 @@
 	@Created : 2015. NOV. 19
 */
 
-/*	Capslock is mode changer in this program
+/*	
+	Capslock is mode changer in this program
 	command  - Mode like VIM. (Arrow keys and Mouse controls)
 	insert   - Normal key input mode.
 	capslock - Normal Capslock mode.
 */
 CapsLock::
 +Capslock::
-{	
 	input_number := ""
 	
 	GetKeyState, lockState, CapsLock, T)
@@ -27,13 +27,11 @@ CapsLock::
 	}
 	Send, {LShift up}
 return
-}
 
 /* 
     capslock mode changer
 */
-changeMode(opt)
-{
+changeMode(opt) {
 	KeyWait, CapsLock
 	GetKeyState, lockState, CapsLock, T)
 	If(lockState = "D" && opt == "auto")	{
@@ -46,14 +44,13 @@ changeMode(opt)
 		msg := "I"
 		showToolTip(msg, 1000, 1000)
 	}
-return	
+	return	
 }
 
 /* 
 	tooltip controller
 */
-showToolTip(msg, sec, afterSec)
-{
+showToolTip(msg, sec, afterSec) {
 	CoordMode, ToolTip, screen
 	ToolTip, %msg%, A_ScreenWidth/2, A_ScreenHeight
 	if(sec > 0)

@@ -9,7 +9,7 @@
 #include ModeView.ahk		; change mode by Capslock state
 #Include Utilities.ahk		; utility functions
 #Include VimLike.ahk		; Vim like key setting
-#Include Mouse.ahk			; Mouse control functions
+#Include Navigation.ahk			; Mouse control functions
 #include Space.ahk			; Space Key navigation
 
 SetDefaultMouseSpeed, 0 

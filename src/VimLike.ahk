@@ -51,6 +51,7 @@
 	g::	; gt (next tab), gr (previous tab) 
 	t::		; gt (next tab)
 	r::		; gr (previous tab), r (mouse wheel up)
+	^b::	; page_up : vim_like
 	f::		; mouse wheel down
 	^f::	; page_down : vim_like
 	^q::	; hold click mouse left button
@@ -94,49 +95,3 @@
 		showToolTip(str, 1000, 1000)
 	return
 #if
-
-#If GetKeyState("capslock","T") and StrLen(input_number) < 1
-		*h:: Left
-		*j:: Down
-		*k:: Up
-		*l:: Right
-#If
-
-
-#If GetKeyState("capslock","T") and StrLen(input_number) > 0
-		*h:: hjkl_move("Left", input_number)
-		*j:: hjkl_move("Down", input_number)
-		*k:: hjkl_move("Up", input_number)
-		*l:: hjkl_move("Right", input_number)
-#If
-
-/*
-	functions
-*/
-hjkl_move(key, ByRef cnt){
-	Send {%key% %cnt%}
-	cnt := ""
-	changeMode("auto")
-}
- 
-/*
-	tab move
-*/
-func_gt(ByRef input_number)
-{
-	Send, ^{PGDN %input_number%}
-}
-func_gr(ByRef input_number)
-{
-	Send, ^{PGUP %input_number%}
-}
-func_0(ByRef input_number)
-{
-	Send, {Home}	
-}
-func_4(ByRef input_number)
-{
-	if(1 == GetKeyState("shift", "P")){
-		Send, {End}
-	}
-}
