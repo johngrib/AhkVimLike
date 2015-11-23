@@ -64,7 +64,8 @@
 	$a::	; move mouse pointer left
 	$s::	; move mouse pointer down
 	$d::	; move mouse pointer right
-
+	x::	; delete
+	+x:: 	; backspace
 		; get hot_key
 		hot_key := A_ThisHotkey
 		if(RegExMatch(A_ThisHotkey, "^\W")){

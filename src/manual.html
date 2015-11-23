@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AhkVimLike Manual</title>
+    <style type="text/css">
+        td {
+            padding: 5px; 
+            border : 1px solid grey;
+            text-align : center;
+        }
+        td:nth-child(3) {
+            background-color: #DDFFFF;
+        }
+        td:nth-child(1n + 4) {
+            text-align : left;
+        }
+    </style>
+</head>
+<body>
+    <h1>AhkVimLike	Version 3.0</h1>
+    <h2>by <a href="mailto:johngrib82@gmail.com" target="_top">johngrib82@gmail.com</a> </h2>
+    <h2>
+        <a href="https://github.com/johngrib/AhkVimLike">Github repository</a>
+    </h2>
+    <h3> MEANINGS </h3>
+    <ul>
+        <li> ^ : Control key </li>
+        <li> + : Shift key </li>
+        <li> & : press first key then press second key <br>
+		    exam) a & b : press and hold A, then press B
+        </li>
+    </ul>
+
+    <h3> KEY MAPS </h3>
+    <table >
+        <thead>
+            <tr>
+                <th>mode</th>
+                <th>type</th>
+                <th>hot key </th>
+                <th>description </th>
+                <th>example </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>-</td>
+                <td>mode change</td>
+                <td>Capslock</td>
+                <td>swap INSERT/COMMAND mode</td>
+                <td>Capslock</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>mode change</td>
+                <td>+Capslock</td>
+                <td>upper case input mode</td>
+                <td>+Capslock</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>Capslock & Space</td>
+                <td>swap English/Korean mode</td>
+                <td>Capslock & Space</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>Capslock & F4</td>
+                <td>Exit program</td>
+                <td>Capslock & F4</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>Capslock & F5</td>
+                <td>Reload program</td>
+                <td>Capslock & F5</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mode change</td>
+                <td>(+) I</td>
+                <td>insert</td>
+                <td>I : insert<br>
+                    +I : insert at the beginning of the line </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mode change</td>
+                <td>(+) O</td>
+                <td>append a new line</td>
+                <td>O : append a new line below the current line<br>
+                    +O : append a new line above the current line
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>key input</td>
+                <td>H</td>
+                <td>Left</td>
+                <td>H : Send Left Key<br> 3H : Send Left Key 3 times</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>key input</td>
+                <td>J</td>
+                <td>Down</td>
+                <td>J : Send Down Key<br> 27J : Send Down Key 27 times</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>key input</td>
+                <td>K</td>
+                <td>Up</td>
+                <td>K : Send Up Key<br> 2K : Send Up Key 2 times</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>key input</td>
+                <td>L</td>
+                <td>Right</td>
+                <td>L : Send Right Key<br> 2L : Send Right Key 2 times</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>key input</td>
+                <td>0</td>
+                <td>Home</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>key input</td>
+                <td>+4</td>
+                <td>End : $</td>
+                <td>+4</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>key input</td>
+                <td>^B</td>
+                <td>Page Up</td>
+                <td>^B : Page Up <br> 300^B : Send Page Up key 300 times</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>key input</td>
+                <td>^F</td>
+                <td>Page Down</td>
+                <td>^F : Page Down <br> 4^F : Send Page Down key 4 times</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse input</td>
+                <td>(^ +) Q</td>
+                <td>Left Button of Mouse</td>
+                <td>Q : Click left <br>
+                    ^Q : Click left hold<br>
+                    +Q : unhold<br>
+                    100Q : Click left 100 times
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse input</td>
+                <td>(^ +) E</td>
+                <td>Right Button of Mouse</td>
+                <td>E : Click right<br>
+                    ^E : Click right hold<br>
+                    +E : unhold<br>
+                    10E : Click right 10 times
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse input</td>
+                <td>R</td>
+                <td>Wheel up</td>
+                <td>R : Wheel up<br>
+                    5R : Wheel up 5 times
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse input</td>
+                <td>F</td>
+                <td>Wheel down</td>
+                <td>F : Wheel up<br>
+                    50F : Wheel down 50 times
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>N</td>
+                <td>move mouse pointer 400 pixel</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>M</td>
+                <td>move mouse pointer 10 pixel</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>,</td>
+                <td>move mouse pointer 1 pixel</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>(N M ,) W</td>
+                <td>move mouse pointer up</td>
+                <td>W : move mouse pointer up (70 pixel)<br>
+                    3W : move m-pointer up 3times (70*3 pixel) <br>
+                    N & W : move m-pointer up (400 pixel)<br>
+                    M & W : move m-pointer up (10 pixel)<br>
+                    , & W : move m-pointer up (1 pixel)<br>
+                    30 , & W : move m-pixel up (30 pixel)
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>(N M ,) A</td>
+                <td>move mouse pointer left</td>
+                <td>like W</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>(N M ,) S</td>
+                <td>move mouse pointer Down</td>
+                <td>like W</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>(N M ,) D</td>
+                <td>move mouse pointer Right</td>
+                <td>like W</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+		mouse move
+			n  : move mouse pointer 400 pixel
+			m  : move mouse pointer 10 pixel
+			,  : move mouse pointer 1 pixel
+			(if "n m ," not pressed, mouse pointer moves 70 pixel)
+
+			W A S D : Up, Left, Down, Right
+
+			Q  : Left Click
+			^Q : hold Left Click
+			+Q : unhold
+
+			E  : Right Click
+			^E : hold Right Click
+			+E : unhold
+
+			Space & Q W E : Move mouse pointer to top Left-Center-Right
+			Space & A S D : mid Left-Center-Right
+			Space & Z X C : bot Left-Center-Right
+
+
+</body>
+</html>

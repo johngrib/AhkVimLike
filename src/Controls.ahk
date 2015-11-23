@@ -3,9 +3,9 @@
 	@Created : 2015. NOV. 19
 */
 
-/*	
-	CAPSLOCK + F5 : RELOAD
-	CAPSLOCK + F4: Exit program
-*/
-CapsLock & F5:: Reload
-CapsLock & F4:: ExitApp
+func_x(ByRef input_number){
+	if(GetKeyState("Shift"))
+		Send, {BackSpace %input_number%}
+	else if(input_number <> "")
+		Send, {Delete %input_number%}
+}

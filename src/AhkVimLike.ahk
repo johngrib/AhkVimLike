@@ -16,5 +16,15 @@ SetDefaultMouseSpeed, 0
 SetKeyDelay, -1
 SetMouseDelay, -1
 
+CapsLock & F5:: Reload
+CapsLock & F4:: ExitApp
+
 input_number = ""
 input_command = ""
+
+#if GetKeyState("capslock","T")	
+	+VKBF::
+		str = %A_ScriptDir%\manual.html
+		Run, %str%
+	return
+#if

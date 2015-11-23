@@ -3,7 +3,6 @@
 	@Created : 2015. NOV. 19
 */
 #if GetKeyState("capslock","T")
-
     /*
         space + qweasdzxc
         moves mouse pointer to edge of activated window
@@ -16,7 +15,6 @@
         x : center bottom
         c : right bottom
     */
-
 	$Space::return
 	Space & q::
 		MouseMove, 2, 0
