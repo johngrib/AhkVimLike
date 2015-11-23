@@ -154,6 +154,18 @@
             </tr>
             <tr>
                 <td>COMMAND</td>
+                <td>key input</td>
+                <td>(+) X</td>
+                <td>Delete</td>
+                <td>X : do nothing. Just press X to delete is dangerous.<br>
+                    1X : Send Delete Key<br>
+                    10X : Send Delete Key 10 times<br>
+                    +X : Send BackSpace<br>
+                    7+X : Send BackSpace 7 times
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
                 <td>mouse input</td>
                 <td>(^ +) Q</td>
                 <td>Left Button of Mouse</td>
@@ -250,9 +262,65 @@
             <tr>
                 <td>COMMAND</td>
                 <td>mouse move</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>Space & Q</td>
+                <td>move mouse pointer to top left <br>of active window</td>
+                <td>Space & Q</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>Space & W</td>
+                <td>move mouse pointer to top center <br>of active window</td>
+                <td>Space & W</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>Space & E</td>
+                <td>move mouse pointer to top right <br>of active window</td>
+                <td>Space & E</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>Space & A</td>
+                <td>move mouse pointer to middle left <br>of active window</td>
+                <td>Space & A</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>Space & S</td>
+                <td>move mouse pointer to middle center <br>of active window</td>
+                <td>Space & S</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>Space & D</td>
+                <td>move mouse pointer to middle right <br>of active window</td>
+                <td>Space & D</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>Space & Z</td>
+                <td>move mouse pointer to bottom left <br>of active window</td>
+                <td>Space & Z</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>Space & X</td>
+                <td>move mouse pointer to bottom center <br>of active window</td>
+                <td>Space & X</td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>mouse move</td>
+                <td>Space & C</td>
+                <td>move mouse pointer to bottom right <br>of active window</td>
+                <td>Space & C</td>
             </tr>
             <tr>
                 <td>COMMAND</td>
@@ -271,20 +339,6 @@
         </tbody>
     </table>
 		mouse move
-			n  : move mouse pointer 400 pixel
-			m  : move mouse pointer 10 pixel
-			,  : move mouse pointer 1 pixel
-			(if "n m ," not pressed, mouse pointer moves 70 pixel)
-
-			W A S D : Up, Left, Down, Right
-
-			Q  : Left Click
-			^Q : hold Left Click
-			+Q : unhold
-
-			E  : Right Click
-			^E : hold Right Click
-			+E : unhold
 
 			Space & Q W E : Move mouse pointer to top Left-Center-Right
 			Space & A S D : mid Left-Center-Right
