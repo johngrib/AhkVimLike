@@ -95,4 +95,17 @@
 		}
 		showToolTip(str, 1000, 1000)
 	return
+
+	+SC027::
+		SetCapsLockState, Off
+		changeMode("auto")
+		
+		title := "input command"
+		contents := ":reg`n:mark"
+		InputBox, input_sentence, %title%, %contents%, 200, 200
+		
+		SetCapsLockState, On
+		changeMode("auto")
+	return
+
 #if

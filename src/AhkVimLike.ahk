@@ -22,7 +22,7 @@ CapsLock & F4:: ExitApp
 input_number = ""
 input_command = ""
 
-#if GetKeyState("capslock","T")	
+#if GetKeyState("capslock","T") 
 	+VKBF::
 		str = %A_ScriptDir%\manual.html
 		Run, %str%

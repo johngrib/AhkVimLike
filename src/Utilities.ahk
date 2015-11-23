@@ -7,13 +7,15 @@
 	for Korean Language Keyboard with Eclipse vrapper
 	if 'ESC' or ':' press, switch to English 
 */
-#IfWinActive, ahk_class SWT_Window0
+;#IfWinActive, ahk_class SWT_Window0
+#If GetKeyState("capslock","T") = 0
 	~Esc::
 	~+SC027::
 		if(IME_CHECK("A"))
 			Send, {VK15}    ; input Korean/English switch key
 	return
-#IfWinActive
+#if
+;#IfWinActive
 
 /* 
 	Korean/English switch
