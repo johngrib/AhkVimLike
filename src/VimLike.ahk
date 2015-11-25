@@ -101,11 +101,24 @@
 		changeMode("auto")
 		
 		title := "input command"
-		contents := ":reg`n:mark"
-		InputBox, input_sentence, %title%, %contents%, 200, 200
+		contents := ""
+		InputBox, input_sentence, %title%, %contents%, ,300, 110
 		
+		word_array1 := ""
+		word_array2 := ""
+		word_array3 := ""
+
+		StringSplit, word_array, input_sentence, %A_Space%, .  ; Omits periods.
+
+	func_name := "command_" . word_array1
+		
+		if( IsFunc( func_name) ) {
+			%func_name%(word_array2)
+		}
+
 		SetCapsLockState, On
+		input_number := ""
+		input_command := ""
 		changeMode("auto")
 	return
-
 #if

@@ -9,10 +9,16 @@
             border : 1px solid grey;
             text-align : center;
         }
-        td:nth-child(3) {
+        #keymaps td:nth-child(3) {
             background-color: #DDFFFF;
         }
-        td:nth-child(1n + 4) {
+        #keymaps td:nth-child(1n + 4) {
+            text-align : left;
+        }
+        #functions td:nth-child(1) {
+            background-color: #DDFFFF;
+        }
+        #functions td:nth-child(1n + 2) {
             text-align : left;
         }
     </style>
@@ -33,7 +39,7 @@
     </ul>
 
     <h3> KEY MAPS </h3>
-    <table >
+    <table id="keymaps">
         <thead>
             <tr>
                 <th>mode</th>
@@ -338,12 +344,66 @@
             </tr>
         </tbody>
     </table>
-		mouse move
-
-			Space & Q W E : Move mouse pointer to top Left-Center-Right
-			Space & A S D : mid Left-Center-Right
-			Space & Z X C : bot Left-Center-Right
-
-
+    <h3> : FUNCTIONS</h3>
+    <h4>in command mode, type ":" and input function name </h4>
+    <table id='functions'>
+        <thead>
+            <tr>
+                <th>function name </th>
+                <th>description </th>
+                <th>example </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>min</td>
+                <td>minimize active window</td>
+                <td>:min&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>max</td>
+                <td>maximize active window</td>
+                <td>:max&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>w</td>
+                <td>send ctrl + s</td>
+                <td>:w&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>trans</td>
+                <td>adjust invisibility of active window. (0 ~ 255)</td>
+                <td>:trans&lt;ENTER&gt;<br>
+                    :trans 0&lt;ENTER&gt;<br>
+                    :trans 255&lt;ENTER&gt;
+                </td>
+            </tr>
+            <tr>
+                <td>notrans</td>
+                <td>reset invisibility of active window to 255</td>
+                <td>:notrans&lt;ENTER&gt; </td>
+            </tr>
+            <tr>
+                <td>kill</td>
+                <td>kill the process of active window</td>
+                <td>:kill&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>top</td>
+                <td>always on top this active window. (toggle)</td>
+                <td>:top&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>color</td>
+                <td>get rgb value of point at mouse pointer and input to clipboard</td>
+                <td>:color&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>:&lt;ENTER&gt;</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
