@@ -3,69 +3,64 @@
 	@Created : 2015. NOV. 19
 */
 
-#if GetKeyState("capslock","T")	
-	/*
-		number commands : numbers works like VIM
-	*/
-		0::
-		1::
-		2::
-		3::
-		4::
-		5::
-		6::
-		7::
-		8::
-		9::
-			input_number := input_number . A_ThisHotkey
-			
-			if ( input_number = "0" ) {
-				func_0(input_number)
-				input_number := ""
-				return
-			}
-			showToolTip(input_number, 1000, 1000)
+/*
+	number commands : numbers works like VIM
+*/
+$0::
+$1::
+$2::
+$3::
+$4::
+$5::
+$6::
+$7::
+$8::
+$9::
+	StringTrimLeft, hot_key, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
+	input_number := input_number . hot_key
+	
+	if ( input_number = "0" ) {
+		key_0(input_number)
+		input_number := ""
 		return
+	}
+	showToolTip(input_number, 1000, 1000)
+return
 
-		; shift + 4 : END key
-		+4:: func_4(input_number)
+; shift + 4 : END key
+$+4:: key_4(input_number)
 
-	*i::
-	*o::
-		SetCapsLockState, Off
-		GetKeyState, isShiftDown, Shift, P
-		changeMode("auto")
-		if(A_ThisHotkey == "*i"){
-			if("D" == isShiftDown) 
-				Send, {Home}
-		} else if (A_ThisHotkey == "*o"){
-			if("D" == isShiftDown) 
-				Send, {Up}
-			Send, {End}{Enter}
-		}
-	return
+$*i::
+$*o::
+	SetCapsLockState, Off
+	GetKeyState, isShiftDown, Shift, P
+	changeMode("auto")
+	
+	if(GetKeyState("i", "P")){
+		if("D" == isShiftDown) 
+			Send, {Home}
+	} else if(GetKeyState("o", "P")){
+		if("D" == isShiftDown) 
+			Send, {Up}
+		Send, {End}{Enter}
+	}
+return
 
 	/* 
 		commands (joinable with number)
 	*/
-	g::	; gt (next tab), gr (previous tab) 
-	t::		; gt (next tab)
-	r::		; gr (previous tab), r (mouse wheel up)
-	^b::	; page_up : vim_like
-	f::		; mouse wheel down
-	^f::	; page_down : vim_like
-	^q::	; hold click mouse left button
-	+q:: ; unhold click mouse left button
-	q::	; click mouse left button
-	^e::	; hold click mouse right button
-	+e::	; unhold click mouse right button
-	e::	; click mouse right button
-	$w::	; move mouse pointer up
-	$a::	; move mouse pointer left
-	$s::	; move mouse pointer down
-	$d::	; move mouse pointer right
-	x::	; delete
-	+x:: 	; backspace
+	$*g::
+	$*t::
+	$*r::
+	$*b::
+	$*f::
+	$*q::
+	$*e::
+	$*w::
+	$*a::
+	$*s::
+	$*d::
+	$*x::
 		; get hot_key
 		hot_key := A_ThisHotkey
 		if(RegExMatch(A_ThisHotkey, "^\W")){
@@ -75,7 +70,7 @@
 		; join previous command with current command
 		input_command := input_command . hot_key
 		str := input_number . input_command
-		func_name := "func_" . input_command
+		func_name := "key_" . input_command
 		clear_command := 0
 
 		; if command and function name matched, call function
@@ -96,7 +91,7 @@
 		showToolTip(str, 1000, 1000)
 	return
 
-	+SC027::
+	$+SC027::	;  : (colon) command
 		SetCapsLockState, Off
 		changeMode("auto")
 		
@@ -122,4 +117,13 @@
 		input_command := ""
 		changeMode("auto")
 	return
-#if
+
+/*
+	mouse pointer accelator
+	n + w a s d
+	m + w a s d
+	, + w a s d
+*/
+    $n::return
+    $m::return
+    $SC033::return

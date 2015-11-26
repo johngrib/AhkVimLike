@@ -6,11 +6,11 @@
 #SingleInstance
 #NoTrayIcon
 #Persistent
-#Include Controls.ahk		; exit/reload program
+#include KeyMaps.ahk		; key define
 #include ModeView.ahk		; change mode by Capslock state
 #Include Utilities.ahk		; utility functions
 #Include VimLike.ahk		; Vim like key setting
-#Include Navigation.ahk			; Mouse control functions
+#Include Navigation.ahk	; Mouse control functions
 #include Space.ahk			; Space Key navigation
 #include Commands.ahk	; Command functions
 
@@ -22,9 +22,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 CapsLock & F5:: Reload
 CapsLock & F4:: ExitApp
-
-input_number = ""
-input_command = ""
 
 #if GetKeyState("capslock","T") 
 	+VKBF::
