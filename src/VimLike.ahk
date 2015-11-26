@@ -103,6 +103,7 @@
 		title := "input command"
 		contents := ""
 		InputBox, input_sentence, %title%, %contents%, ,300, 110
+		input_sentence := Trim(input_sentence)
 		
 		word_array1 := ""
 		word_array2 := ""
