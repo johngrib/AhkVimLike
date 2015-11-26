@@ -1,15 +1,25 @@
-﻿func_get_key_maps(){
+﻿/*
+	key mapping functions : key_[a-z]+
+	@Author : johngrib82@gmail.com
+	@Created : 2015. NOV. 26
+*/
+
+func_get_key_maps(){
 	; numbers 
 	command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
 
 	; normal commands
-	command_keymap.InsertAt(1, "$*i", "$*o",  "$*x", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$*w","$*a","$*s","$*d")
+	command_keymap.InsertAt(1, "$*i", "$*o",  "$*x", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$w","$a","$s","$d", "$m")
 
-	; mouse accelator
-	command_keymap.InsertAt(1, "$n", "$m",  "$SC033")
+	; mouse accelator 	[  ]  \
+	command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
 
-	;  colon
-	command_keymap.InsertAt(1, "$+SC027")
+	command_keymap.InsertAt(1, "$+VKBF")
+
+	;command_keymap.InsertAt(1, "$*h", "$*j", "$*k", "$*l")
+	command_keymap.InsertAt(1, "$Space", "Space & q", "Space & w", "Space & e", "Space & a", "Space & s", "Space & d", "Space & z", "Space & x", "Space & c")
+
+	command_keymap.InsertAt(1, "$SC028")
 
 	return command_keymap
 }
@@ -18,7 +28,9 @@
 	x, +x : delete, backspace
 */
 key_x(ByRef input_number){
-	if(GetKeyState("Shift"))
+	if(GetKeyState("Control"))
+		Send, ^{x}
+	else if(GetKeyState("Shift"))
 		Send, {BackSpace %input_number%}
 	else if(input_number <> "")
 		Send, {Delete %input_number%}
@@ -70,11 +82,11 @@ key_b(ByRef input_number) {
 	+q : unHold
 */
 key_q(ByRef input_number) {
-	if( GetKeyState("Control") = 1)
+	if( GetKeyState("Control"))
 		Click Down Left
-	else if( GetKeyState("Shift") = 1)
+	else if( GetKeyState("Shift"))
 		Click Up Left
-	else if( GetKeyState("Space", "p") = 1)
+	else if( GetKeyState("Space", "p"))
 		MouseMove, 5, 5
 	else
 		Click, Left, %input_number%
@@ -86,9 +98,9 @@ key_q(ByRef input_number) {
 	+e : unHold
 */
 key_e(ByRef input_number) {
-	if( GetKeyState("Control") = 1)
+	if( GetKeyState("Control") )
 		Click Down Right
-	else if( GetKeyState("Shift") = 1)
+	else if( GetKeyState("Shift") )
 		Click Up Right
 	else
 		Click, Right, %input_number%
@@ -101,26 +113,36 @@ key_e(ByRef input_number) {
 	s : down
 	d : right
 */
-key_w(ByRef input_number) {
-	if(input_number = "") 
-		input_number := 1
+key_w(ByRef input_number) {	
 	func_mouse_move( input_number , 1, 1, 1 )
 }
 key_a(ByRef input_number) {
-	if(input_number = "")
-		input_number := 1
 	func_mouse_move( 1, input_number, 1, 1 )
 }
 key_s(ByRef input_number) {
-	if(input_number = "")
-		input_number := 1
 	func_mouse_move( 1, 1, input_number, 1 )
 }
 key_d(ByRef input_number) {
-	if(input_number = "")
-		input_number := 1
 	func_mouse_move( 1, 1, 1, input_number )
 }
+
+/*
+	H J K L move
+*/
+/*
+key_h(ByRef input_number) {
+	Send {Left %input_number%}
+}
+key_j(ByRef input_number) {
+	Send {Down %input_number%}
+}
+key_k(ByRef input_number) {
+	Send {Up %input_number%}
+}
+key_l(ByRef input_number) {
+	Send {Right %input_number%}
+}
+*/
 
 /*
 	tab move

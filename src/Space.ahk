@@ -2,7 +2,8 @@
 	@Author : johngrib82@gmail.com
 	@Created : 2015. NOV. 19
 */
-#if GetKeyState("capslock","T")
+
+	$Space::return
     /*
         space + qweasdzxc
         moves mouse pointer to edge of activated window
@@ -15,7 +16,6 @@
         x : center bottom
         c : right bottom
     */
-	$Space::return
 	Space & q::
 		MouseMove, 2, 0
 	return
@@ -67,5 +67,3 @@
 		WinGetActiveStats, winid, ww, hh, xx, yy
 		MouseMove, ww -2, hh - 2 
 	return
-	
-#if

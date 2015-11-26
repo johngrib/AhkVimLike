@@ -16,8 +16,23 @@ $6::
 $7::
 $8::
 $9::
-	StringTrimLeft, hot_key, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
-	input_number := input_number . hot_key
+	StringTrimLeft, num, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
+
+	if(input_command = "m"){
+		func_win_memorize(num)
+		input_number := ""
+		input_command := ""
+		changeMode("auto")
+		return
+	} else if (input_command = "'"){
+		func_win_mem_activate(num)
+		input_number := ""
+		input_command := ""
+		changeMode("auto")
+		return
+	}
+
+	input_number := input_number . num
 	
 	if ( input_number = "0" ) {
 		key_0(input_number)
@@ -32,19 +47,9 @@ $+4:: key_4(input_number)
 
 $*i::
 $*o::
-	SetCapsLockState, Off
-	GetKeyState, isShiftDown, Shift, P
-	changeMode("auto")
-	
-	if(GetKeyState("i", "P")){
-		if("D" == isShiftDown) 
-			Send, {Home}
-	} else if(GetKeyState("o", "P")){
-		if("D" == isShiftDown) 
-			Send, {Up}
-		Send, {End}{Enter}
-	}
+	func_i_o()
 return
+
 
 	/* 
 		commands (joinable with number)
@@ -56,14 +61,19 @@ return
 	$*f::
 	$*q::
 	$*e::
-	$*w::
-	$*a::
-	$*s::
-	$*d::
+	$w::
+	$a::
+	$s::
+	$d::
 	$*x::
+	$m::
+	$SC028::  ;  '
 		; get hot_key
 		hot_key := A_ThisHotkey
-		if(RegExMatch(A_ThisHotkey, "^\W")){
+		
+		if(A_ThisHotkey = "$SC028"){
+			hot_key := "'"
+		} else if(RegExMatch(A_ThisHotkey, "^\W")){
 			StringTrimLeft, hot_key, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
 		}
 		
@@ -76,6 +86,10 @@ return
 		; if command and function name matched, call function
 		; commands length should shorter than 4
 		if( IsFunc( func_name) ) {
+			
+			if(input_number = "")
+				input_number := 1
+			
 			%func_name%(input_number)
 			clear_command = 1
 		} else if( 3 < StrLen(input_command)){
@@ -124,6 +138,31 @@ return
 	m + w a s d
 	, + w a s d
 */
-    $n::return
-    $m::return
-    $SC033::return
+    $SC01A::return	;  [
+    $SC01B::return	;  ]
+    $SC02B::return	;  ]
+
+	$+VKBF::
+		str = %A_ScriptDir%\manual.html
+		Run, %str%
+	return
+	
+	/*
+	h j k l moves
+	h : left
+	j : down
+	k : up
+	l : right
+*/
+#If GetKeyState("capslock","T") and StrLen(input_number) < 1
+		*h:: Left
+		*j:: Down
+		*k:: Up
+		*l:: Right
+#If
+#If GetKeyState("capslock","T") and StrLen(input_number) > 0
+		*h:: func_hjkl_move("Left", input_number)
+		*j:: func_hjkl_move("Down", input_number)
+		*k:: func_hjkl_move("Up", input_number)
+		*l:: func_hjkl_move("Right", input_number)
+#If

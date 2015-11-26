@@ -14,8 +14,8 @@
 		if(IME_CHECK("A"))
 			Send, {VK15}    ; input Korean/English switch key
 	return
-#if
-;#IfWinActive
+;#if
+#IfWinActive
 
 /* 
 	Korean/English switch

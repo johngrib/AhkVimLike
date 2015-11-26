@@ -1,4 +1,10 @@
 /*
+	command functions : command_[a-z]+
+	@Author : johngrib82@gmail.com
+	@Created : 2015. NOV. 25
+*/
+
+/*
 	minimize active window
 */
 command_min(option) {
@@ -59,4 +65,24 @@ command_color(option){
 	StringTrimLeft,rgb,rgb,2
 	Clipboard=%rgb%
 	Return	
+}
+
+/*
+	shows list of memorized windows
+*/
+command_mem(option){
+	msg := ""
+	loop 10
+	{
+		num = %A_Index%
+		num -= 1
+		win_id := memorized_%num%
+		
+		WinGetTitle, title, ahk_id %win_id%
+		
+		msg .= num . " : "
+		msg .= title
+		msg .= "`n"
+	}
+	MsgBox %msg%
 }
