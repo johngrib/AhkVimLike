@@ -36,6 +36,7 @@
         <li> & : press first key then press second key <br>
 		    exam) a & b : press and hold A, then press B
         </li>
+        <li> \d : a number</li>
     </ul>
 
     <h3> KEY MAPS </h3>
@@ -330,10 +331,34 @@
             </tr>
             <tr>
                 <td>COMMAND</td>
-                <td>mouse move</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>window control</td>
+                <td>m\d ( 0 ~ 9 )</td>
+                <td>mark window</td>
+                <td>m0 : bookmark activated window to number 0<br>
+                    m1 : bookmark activated window to number 1<br>
+                    ...<br>
+                    m9 : bookmark activated window to number 9<br>
+                    (view all bookmarks :mark function)
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>window control</td>
+                <td>'\d ( 0 ~ 9 )</td>
+                <td>go to marked window</td>
+                <td>'0 : activate 0 bookmarked window<br>
+                    '1 : activate 1 bookmarked window<br>
+                    ...<br>
+                    '9 : activate 9 bookmarked window<br>
+                    (view all bookmarks :mark function)
+                </td>
+            </tr>
+            <tr>
+                <td>COMMAND</td>
+                <td>window control</td>
+                <td>Capslock & t</td>
+                <td>always on top this active window. (toggle)</td>
+                <td>Capslock & t</td>
             </tr>
             <tr>
                 <td></td>
@@ -389,19 +414,44 @@
                 <td>:kill&lt;ENTER&gt;</td>
             </tr>
             <tr>
-                <td>top</td>
-                <td>always on top this active window. (toggle)</td>
-                <td>:top&lt;ENTER&gt;</td>
-            </tr>
-            <tr>
                 <td>color</td>
                 <td>get rgb value of point at mouse pointer and input to clipboard</td>
                 <td>:color&lt;ENTER&gt;</td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td>:&lt;ENTER&gt;</td>
+                <td>mark</td>
+                <td>show list of marked window's name</td>
+                <td>:mark&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>edit</td>
+                <td>edit script</td>
+                <td>:edit&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>log</td>
+                <td>show key log</td>
+                <td>:log&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>hotkey</td>
+                <td>show list of hot keys</td>
+                <td>:hotkey&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>get title text of activated window</td>
+                <td>:title&lt;ENTER&gt;</td>
+            </tr>
+            <tr>
+                <td>time</td>
+                <td>get time text</td>
+                <td>:time&lt;ENTER&gt; : get time text of now<br>
+                    :time date&lt;ENTER&gt; : get date text of today<br>
+                    :time [format] : get formatted date/time text<br>
+                    <br>
+                    :time help : open Date/time Format document
+                </td>
             </tr>
         </tbody>
     </table>

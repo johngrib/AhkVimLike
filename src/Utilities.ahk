@@ -21,7 +21,7 @@
 	Korean/English switch
 */
 CapsLock & Space::Send, {VK15}
-
+CapsLock & t::WinSet, AlwaysOnTop, Toggle, A
 /*
 	IME check (MS Windows Korean character input mode check)
 */

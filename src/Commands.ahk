@@ -5,17 +5,16 @@
 */
 
 /*
-	minimize active window
-*/
-command_min(option) {
-	WinMinimize, A
-}
-
-/*
 	maximize active window
 */
 command_max(option) {
 	WinMaximize, A
+}
+/*
+	minimize active window
+*/
+command_min(option) {
+	WinMinimize, A
 }
 
 /*
@@ -50,13 +49,6 @@ command_kill(option){
 }
 
 /*
-	always on top (toggle)
-*/
-command_top(option){
-	WinSet, AlwaysOnTop, Toggle, A
-}
-
-/*
 	get color at mouse pointer
 */
 command_color(option){
@@ -70,7 +62,7 @@ command_color(option){
 /*
 	shows list of memorized windows
 */
-command_mem(option){
+command_mark(option){
 	msg := ""
 	loop 10
 	{
@@ -85,4 +77,55 @@ command_mem(option){
 		msg .= "`n"
 	}
 	MsgBox %msg%
+}
+
+/*
+	edit script
+*/
+command_edit(option){
+	Edit
+}
+
+/*
+	show key log
+*/
+command_log(option){
+	KeyHistory
+}
+
+/*
+	show list of hot keys
+*/
+command_hotkey(option){
+	ListHotkeys
+}
+
+/*
+	get title text of active window
+*/
+command_title(option){
+	WinGetActiveTitle, title
+	InputBox, title, TITLE, , , 300, 110, , , , , %title%
+}
+
+/*
+	get time/date string
+*/
+command_time(option){
+	if(option = "help"){
+		Run, https://www.autohotkey.com/docs/commands/FormatTime.htm#Date_Formats_case_sensitive
+		return
+	}
+	
+	if(option = ""){
+		FormatTime, TimeString
+	} else if(option = "date"){
+		;FormatTime, TimeString, , dddd MMMM d, yyyy hh:mm:ss tt
+		FormatTime, TimeString, ,yyyy.MM.d
+	} else if(option = "now"){
+		FormatTime, TimeString, ,hh:mm:ss
+	} else {
+		FormatTime, TimeString, ,%option%
+	}
+	InputBox, time, time, , , 300, 110, , , , , %TimeString%
 }

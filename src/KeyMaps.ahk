@@ -153,3 +153,7 @@ key_gt(ByRef input_number) {
 key_gr(ByRef input_number) {
 	Send, ^{PGUP %input_number%}
 }
+
+key_tp(ByRef input_number){
+	WinSet, AlwaysOnTop, Toggle, A	
+}
