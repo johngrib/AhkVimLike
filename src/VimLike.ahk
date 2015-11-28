@@ -120,7 +120,7 @@ return
 
 		StringSplit, word_array, input_sentence, %A_Space%, .  ; Omits periods.
 
-	func_name := "command_" . word_array1
+		func_name := "command_" . word_array1
 		
 		if( IsFunc( func_name) ) {
 			%func_name%(word_array2)
@@ -140,12 +140,12 @@ return
 */
     $SC01A::return	;  [
     $SC01B::return	;  ]
-    $SC02B::return	;  ]
+    $SC02B::return	;  \
 
-	$+VKBF::
-		str = %A_ScriptDir%\manual.html
-		Run, %str%
-	return
+/*
+	help
+*/
+	$+VKBF::Run, ".\manual.html"
 	
 	/*
 	h j k l moves

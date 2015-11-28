@@ -116,17 +116,16 @@ command_time(option){
 		Run, https://www.autohotkey.com/docs/commands/FormatTime.htm#Date_Formats_case_sensitive
 		return
 	}
+
+	format_str := { "": "", "date" :  "yyyy.MM.d", "now" : "hh:mm:ss"}
 	
-	if(option = ""){
-		FormatTime, TimeString
-	} else if(option = "date"){
-		;FormatTime, TimeString, , dddd MMMM d, yyyy hh:mm:ss tt
-		FormatTime, TimeString, ,yyyy.MM.d
-	} else if(option = "now"){
-		FormatTime, TimeString, ,hh:mm:ss
-	} else {
-		FormatTime, TimeString, ,%option%
-	}
+	if(format_str.HasKey(option))
+		form := format_str[option]
+	else
+		form := option
+	
+	FormatTime, TimeString, ,%form%
+
 	InputBox, time, time, , , 300, 110, , , , , %TimeString%
 }
 

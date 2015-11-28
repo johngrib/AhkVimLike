@@ -24,14 +24,8 @@ CapsLock & F5:: Reload
 CapsLock & F4:: ExitApp
 
 global MARK
-global TE
 
 main(){
 	Static init := main()
 	MARK := {}
-	loop, 10
-	{
-		num := A_Index - 1
-		MARK[num] := ""
-	}
 }
