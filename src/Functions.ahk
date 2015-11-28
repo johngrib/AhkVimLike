@@ -53,14 +53,14 @@ func_i_o() {
 	}
 }
 
-func_win_mem_activate(num){
-	win_id := memorized_%num%
+func_win_mem_activate(num){	
+	win_id := MARK[num]
 	WinActivate ahk_id %win_id%
 	return
 }
 
-func_win_memorize(num) {	
+func_win_memorize(num) {
 	activeWin := WinExist("A")
-	memorized_%num% := activeWin
+	MARK[num] := activeWin
     return	
 }

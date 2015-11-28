@@ -68,7 +68,7 @@ command_mark(option){
 	{
 		num = %A_Index%
 		num -= 1
-		win_id := memorized_%num%
+		win_id := MARK[num]
 		
 		WinGetTitle, title, ahk_id %win_id%
 		
@@ -128,4 +128,8 @@ command_time(option){
 		FormatTime, TimeString, ,%option%
 	}
 	InputBox, time, time, , , 300, 110, , , , , %TimeString%
+}
+
+command_list(option){
+	ListVars
 }

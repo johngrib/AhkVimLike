@@ -23,13 +23,15 @@ SetWorkingDir %A_ScriptDir%
 CapsLock & F5:: Reload
 CapsLock & F4:: ExitApp
 
-global	memorized_0 := ""
-global	memorized_1 := ""
-global	memorized_2 := ""
-global	memorized_3 := ""
-global	memorized_4 := ""
-global	memorized_5 := ""
-global	memorized_6 := ""
-global	memorized_7 := ""
-global	memorized_8 := ""
-global	memorized_9 := ""
+global MARK
+global TE
+
+main(){
+	Static init := main()
+	MARK := {}
+	loop, 10
+	{
+		num := A_Index - 1
+		MARK[num] := ""
+	}
+}
