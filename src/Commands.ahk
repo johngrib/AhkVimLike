@@ -7,28 +7,30 @@
 /*
 	maximize active window
 */
-command_max(option) {
+command_max(args) {
 	WinMaximize, A
 }
 /*
 	minimize active window
 */
-command_min(option) {
+command_min(args) {
 	WinMinimize, A
 }
 
 /*
 	send ctrl + s
 */
-command_w(option) {
+command_w(args) {
 	Send, ^s
 }
 
 /*
 	adjust window invisibility 0 ~ 255
 */
-command_trans(option){
-	if(option = "") 
+command_trans(args){
+	if(args.HasKey(2))
+		option := args[2]
+	else
 		option := 35
 
 	WinSet, Transparent, %option% , A
@@ -37,44 +39,39 @@ command_trans(option){
 /*
 	reset window inivisibility
 */
-command_notrans(option){
+command_notrans(args){
 	WinSet, Transparent, OFF, A
 }
 
 /*
 	kill process (active window)
 */
-command_kill(option){
+command_kill(args){
 	WinKill, A
 }
 
 /*
 	get color at mouse pointer
 */
-command_color(option){
-	MouseGetPos,x,y
-	PixelGetColor,rgb,x,y,RGB
-	StringTrimLeft,rgb,rgb,2
-	Clipboard=%rgb%
+command_color(args){
+	MouseGetPos, x, y
+	PixelGetColor, rgb, x, y, RGB
+	StringTrimLeft, rgb, rgb, 2
+	InputBox, color, color, , , 300, 110, , , , , %rgb%
 	Return	
 }
 
 /*
 	shows list of memorized windows
 */
-command_mark(option){
+command_mark(args){
 	msg := ""
 	loop 10
 	{
-		num = %A_Index%
-		num -= 1
+		num := A_Index - 1
 		win_id := MARK[num]
-		
 		WinGetTitle, title, ahk_id %win_id%
-		
-		msg .= num . " : "
-		msg .= title
-		msg .= "`n"
+		msg .= num . " : " . title . "`n"
 	}
 	MsgBox %msg%
 }
@@ -82,28 +79,28 @@ command_mark(option){
 /*
 	edit script
 */
-command_edit(option){
+command_edit(args){
 	Edit
 }
 
 /*
 	show key log
 */
-command_log(option){
+command_log(args){
 	KeyHistory
 }
 
 /*
 	show list of hot keys
 */
-command_hotkey(option){
+command_hotkey(args){
 	ListHotkeys
 }
 
 /*
 	get title text of active window
 */
-command_title(option){
+command_title(args){
 	WinGetActiveTitle, title
 	InputBox, title, TITLE, , , 300, 110, , , , , %title%
 }
@@ -111,24 +108,23 @@ command_title(option){
 /*
 	get time/date string
 */
-command_time(option){
-	if(option = "help"){
+command_time(args){
+	if(args.HasKey(2) and args[2] = "help"){
 		Run, https://www.autohotkey.com/docs/commands/FormatTime.htm#Date_Formats_case_sensitive
 		return
 	}
 
 	format_str := { "": "", "date" :  "yyyy.MM.d", "now" : "hh:mm:ss"}
 	
-	if(format_str.HasKey(option))
-		form := format_str[option]
+	if(args.HasKey(2) and format_str.HasKey(args[2]))
+		form := format_str[args[2]]
 	else
-		form := option
+		form := args[2]
 	
 	FormatTime, TimeString, ,%form%
-
 	InputBox, time, time, , , 300, 110, , , , , %TimeString%
 }
 
-command_list(option){
+command_list(args){
 	ListVars
 }

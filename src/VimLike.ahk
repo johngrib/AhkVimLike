@@ -113,17 +113,16 @@ return
 		contents := ""
 		InputBox, input_sentence, %title%, %contents%, ,300, 110
 		input_sentence := Trim(input_sentence)
-		
-		word_array1 := ""
-		word_array2 := ""
-		word_array3 := ""
 
-		StringSplit, word_array, input_sentence, %A_Space%, .  ; Omits periods.
+		args := StrSplit(input_sentence, " ")
 
-		func_name := "command_" . word_array1
+		if(args.Length() < 1){
+			return
+		}
+		func_name := "command_" . args[1]
 		
-		if( IsFunc( func_name) ) {
-			%func_name%(word_array2)
+		if( IsFunc( func_name ) ) {
+			%func_name%(args)
 		}
 
 		SetCapsLockState, On
