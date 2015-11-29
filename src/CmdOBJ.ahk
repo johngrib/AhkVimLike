@@ -42,17 +42,14 @@ class CmdOBJ {
 		KeyWait, CapsLock
 		GetKeyState, lockState, CapsLock, T)
 		If(lockState = "D" && opt == "auto")	{
-			msg := "---- COMMAND MODE ----"
 			option = on
-			showToolTip(msg, 1000, 1000)
+			show_mode("-- NORMAL --")
 		} else If(lockState = "D" && opt == "caps")	{
-			msg := "CAPSLOCK"
 			option = off
-			showToolTip(msg, 1000, 1000)
+			show_mode("-- CAPSLOCK --")
 		} else {
-			msg := "Insert"
 			option = off
-			showToolTip(msg, 1000, 1000)
+			show_mode("-- INSERT --")
 		}
 
 		; enable / disable command hot keys
@@ -66,3 +63,22 @@ class CmdOBJ {
 		return
 	}
 }
+
+show_mode(msg){
+		ww := A_ScreenWidth/2
+		hh := A_ScreenHeight - 58
+		Gui, PANEL:Destroy
+        Gui, PANEL:+AlwaysOnTop +ToolWindow -Caption
+		Gui, PANEL:Color, 000000
+        Gui, PANEL:Font, s9 bold, Verdana
+        Gui, PANEL:Add, Text, cFF0000, %msg%
+        Gui, PANEL:Show,NoActivate x%ww% y%hh%, MODE_WINDOW
+		WinSet, Transparent, 200 , MODE_WINDOW	
+}
+
+#IfWinExist MODE_WINDOW
+F10::
+	WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+	MsgBox % TH
+return
+#if

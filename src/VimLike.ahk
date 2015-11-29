@@ -55,7 +55,7 @@ $9::
 		CMD.clear("num")
 		return
 	}
-	showToolTip(CMD.get_num(), 1000, 1000)
+    show_mode(CMD.get_num())
 return
 
 ; shift + 4 : END key
@@ -115,7 +115,8 @@ return
 			CMD.clear("auto")
 			return
 		}
-		showToolTip(CMD.get_num_cmd(), 1000, 1000)
+
+        show_mode(CMD.get_num_cmd())
 	return
 
 	$+SC027::	;  : (colon) command

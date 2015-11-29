@@ -25,9 +25,12 @@ CapsLock & F4:: ExitApp
 
 global MARK
 global CMD
+global VAR
 
 main(){
 	Static init := main()
 	MARK := {}
+	VAR := {}
 	CMD := new CmdOBJ("", "")
+	CMD.changeMode("auto")
 }

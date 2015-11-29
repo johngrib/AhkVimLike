@@ -62,30 +62,3 @@ func_win_memorize(num) {
 	MARK[num] := activeWin
     return	
 }
-
-/* 
-		tooltip controller
-*/
-showToolTip(msg, sec, afterSec) {
-	CoordMode, ToolTip, screen
-	ToolTip, %msg%, A_ScreenWidth/2, A_ScreenHeight
-	if(sec > 0)
-		SetTimer, RemoveToolTip, off
-	if(afterSec > 0){
-		SetTimer, showModeToolTip, off
-	}
-	return
-}
-RemoveToolTip:
-	SetTimer, RemoveToolTip, Off
-	ToolTip
-return
-showModeToolTip:
-	KeyWait, CapsLock
-	GetKeyState, lockState, CapsLock, T
-	If(lockState = "D")	{
-		showToolTip("-- COMMAND MODE --", -1, -1)
-	} else {
-		showToolTip("-- INSERT --", -1, -1)
-	}
-return
