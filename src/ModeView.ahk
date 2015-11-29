@@ -11,7 +11,7 @@
 */
 CapsLock::
 +Capslock::
-	input_number := ""
+	CMD.clear("num")
 	
 	GetKeyState, lockState, CapsLock, T)
 	if(lockState == "D"){
@@ -63,6 +63,7 @@ changeMode(opt) {
 	tooltip controller
 */
 showToolTip(msg, sec, afterSec) {
+
 	CoordMode, ToolTip, screen
 	ToolTip, %msg%, A_ScreenWidth/2, A_ScreenHeight
 	if(sec > 0)

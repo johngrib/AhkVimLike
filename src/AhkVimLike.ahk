@@ -13,6 +13,7 @@
 #Include Functions.ahk	; Mouse control functions
 #include Space.ahk			; Space Key navigation
 #include Commands.ahk	; Command functions
+#include CmdOBJ.ahk
 
 SendMode Input
 SetDefaultMouseSpeed, 0 
@@ -24,8 +25,10 @@ CapsLock & F5:: Reload
 CapsLock & F4:: ExitApp
 
 global MARK
+global CMD
 
 main(){
 	Static init := main()
 	MARK := {}
+	CMD := new CmdOBJ("", "")
 }

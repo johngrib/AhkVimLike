@@ -5,11 +5,9 @@
 */
 func_hjkl_move(key, ByRef cnt){
 	Send {%key% %cnt%}
-	cnt := ""
+	CMD.set_num("")
 	changeMode("auto")
 }
-
-
 
 func_mouse_move( ww, aa, ss, dd ) {
 	; mouse pointer move distance

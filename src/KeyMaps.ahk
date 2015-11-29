@@ -3,7 +3,6 @@
 	@Author : johngrib82@gmail.com
 	@Created : 2015. NOV. 26
 */
-
 func_get_key_maps(){
 	; numbers 
 	command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
@@ -14,12 +13,11 @@ func_get_key_maps(){
 	; mouse accelator 	[  ]  \
 	command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
 
-	command_keymap.InsertAt(1, "$+VKBF")
+	; colon (+semi-colon) , single quote ( ' )
+	command_keymap.InsertAt(1, "$+VKBF", "$SC028")
 
 	;command_keymap.InsertAt(1, "$*h", "$*j", "$*k", "$*l")
 	command_keymap.InsertAt(1, "$Space", "Space & q", "Space & w", "Space & e", "Space & a", "Space & s", "Space & d", "Space & z", "Space & x", "Space & c")
-
-	command_keymap.InsertAt(1, "$SC028")
 
 	return command_keymap
 }

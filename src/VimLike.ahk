@@ -18,32 +18,26 @@ $8::
 $9::
 	StringTrimLeft, num, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
 
-	if(input_command = "m"){
-		func_win_memorize(num)
-		input_number := ""
-		input_command := ""
-		changeMode("auto")
-		return
-	} else if (input_command = "'"){
-		func_win_mem_activate(num)
-		input_number := ""
-		input_command := ""
-		changeMode("auto")
+	clear_str := { "m": "func_win_memorize", "'" :  "func_win_mem_activate" }
+	if(clear_str.HasKey(CMD.get_cmd())) {
+		function := clear_str[CMD.get_cmd()]
+		%function%(num)
+		CMD.clear("auto")
 		return
 	}
 
-	input_number := input_number . num
-	
-	if ( input_number = "0" ) {
-		key_0(input_number)
-		input_number := ""
+	CMD.append_num(num)
+
+	if ( CMD.get_num() = "0" ) {
+		key_0(CMD.get_num())
+		CMD.clear("num")
 		return
 	}
-	showToolTip(input_number, 1000, 1000)
+	showToolTip(CMD.get_num(), 1000, 1000)
 return
 
 ; shift + 4 : END key
-$+4:: key_4(input_number)
+$+4:: key_4(CMD.get_num())
 
 $*i::
 $*o::
@@ -78,31 +72,28 @@ return
 		}
 		
 		; join previous command with current command
-		input_command := input_command . hot_key
-		str := input_number . input_command
-		func_name := "key_" . input_command
+		CMD.append_cmd(hot_key)
+		func_name := "key_" . CMD.get_cmd()
 		clear_command := 0
 
 		; if command and function name matched, call function
-		; commands length should shorter than 4
+		; commands length should shorter than 3
 		if( IsFunc( func_name) ) {
 			
-			if(input_number = "")
-				input_number := 1
+			if(CMD.get_num() = "")
+				CMD.set_num("1")
 			
-			%func_name%(input_number)
+			%func_name%(CMD.get_num())
 			clear_command = 1
-		} else if( 3 < StrLen(input_command)){
+		} else if( 2 < StrLen(CMD.get_cmd())){
 			clear_command = 1
 		}
-		
+
 		if(clear_command = 1){
-			input_number := ""
-			input_command := ""
-			changeMode("auto")
+			CMD.clear("auto")
 			return
 		}
-		showToolTip(str, 1000, 1000)
+		showToolTip(CMD.get_num_cmd(), 1000, 1000)
 	return
 
 	$+SC027::	;  : (colon) command
@@ -126,9 +117,7 @@ return
 		}
 
 		SetCapsLockState, On
-		input_number := ""
-		input_command := ""
-		changeMode("auto")
+		CMD.clear("auto")
 	return
 
 /*
@@ -153,15 +142,15 @@ return
 	k : up
 	l : right
 */
-#If GetKeyState("capslock","T") and StrLen(input_number) < 1
+#If GetKeyState("capslock","T") and StrLen(CMD.get_num()) < 1
 		*h:: Left
 		*j:: Down
 		*k:: Up
 		*l:: Right
 #If
-#If GetKeyState("capslock","T") and StrLen(input_number) > 0
-		*h:: func_hjkl_move("Left", input_number)
-		*j:: func_hjkl_move("Down", input_number)
-		*k:: func_hjkl_move("Up", input_number)
-		*l:: func_hjkl_move("Right", input_number)
+#If GetKeyState("capslock","T") and StrLen(CMD.get_num()) > 0
+		*h:: func_hjkl_move("Left", CMD.get_num())
+		*j:: func_hjkl_move("Down", CMD.get_num())
+		*k:: func_hjkl_move("Up", CMD.get_num())
+		*l:: func_hjkl_move("Right", CMD.get_num())
 #If
