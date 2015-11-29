@@ -6,7 +6,7 @@
 func_hjkl_move(key, ByRef cnt){
 	Send {%key% %cnt%}
 	CMD.set_num("")
-	changeMode("auto")
+	CMD.changeMode("auto")
 }
 
 func_mouse_move( ww, aa, ss, dd ) {
@@ -39,7 +39,7 @@ return
 func_i_o() {
 	SetCapsLockState, Off
 	GetKeyState, isShiftDown, Shift, P
-	changeMode("auto")
+	CMD.changeMode("auto")
 	
 	if(GetKeyState("i", "P")){
 		if("D" == isShiftDown) 
@@ -62,3 +62,30 @@ func_win_memorize(num) {
 	MARK[num] := activeWin
     return	
 }
+
+/* 
+		tooltip controller
+*/
+showToolTip(msg, sec, afterSec) {
+	CoordMode, ToolTip, screen
+	ToolTip, %msg%, A_ScreenWidth/2, A_ScreenHeight
+	if(sec > 0)
+		SetTimer, RemoveToolTip, off
+	if(afterSec > 0){
+		SetTimer, showModeToolTip, off
+	}
+	return
+}
+RemoveToolTip:
+	SetTimer, RemoveToolTip, Off
+	ToolTip
+return
+showModeToolTip:
+	KeyWait, CapsLock
+	GetKeyState, lockState, CapsLock, T
+	If(lockState = "D")	{
+		showToolTip("-- COMMAND MODE --", -1, -1)
+	} else {
+		showToolTip("-- INSERT --", -1, -1)
+	}
+return

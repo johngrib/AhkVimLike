@@ -3,6 +3,28 @@
 	@Created : 2015. NOV. 19
 */
 
+/*	
+	Capslock is mode changer in this program
+	command  - Mode like VIM. (Arrow keys and Mouse controls)
+	insert   - Normal key input mode.
+	capslock - Normal Capslock mode.
+*/
+CapsLock::
++Capslock::
+	CMD.clear("num")
+	if( GetKeyState("Capslock", "T") ){
+		SetCapsLockState, Off
+	} else {
+		SetCapsLockState, On
+	}
+	if(GetKeyState("shift", "P")){
+		CMD.changeMode("caps")
+	} else {
+		CMD.changeMode("auto")	
+	}
+	Send, {LShift up}
+return
+
 /*
 	number commands : numbers works like VIM
 */
@@ -98,7 +120,7 @@ return
 
 	$+SC027::	;  : (colon) command
 		SetCapsLockState, Off
-		changeMode("auto")
+		CMD.changeMode("auto")
 		
 		title := "input command"
 		contents := ""

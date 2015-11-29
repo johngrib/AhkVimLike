@@ -7,7 +7,6 @@
 #NoTrayIcon
 #Persistent
 #include KeyMaps.ahk		; key define
-#include ModeView.ahk		; change mode by Capslock state
 #Include Utilities.ahk		; utility functions
 #Include VimLike.ahk		; Vim like key setting
 #Include Functions.ahk	; Mouse control functions
