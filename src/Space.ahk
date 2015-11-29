@@ -3,7 +3,9 @@
 	@Created : 2015. NOV. 19
 */
 
+
 	$Space::return
+
     /*
         space + qweasdzxc
         moves mouse pointer to edge of activated window

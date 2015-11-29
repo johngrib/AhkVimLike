@@ -43,13 +43,13 @@ class CmdOBJ {
 		GetKeyState, lockState, CapsLock, T)
 		If(lockState = "D" && opt == "auto")	{
 			option = on
-			show_mode("-- NORMAL --")
+			show_mode("NORMAL")
 		} else If(lockState = "D" && opt == "caps")	{
 			option = off
-			show_mode("-- CAPSLOCK --")
+			show_mode("CAPSLOCK")
 		} else {
 			option = off
-			show_mode("-- INSERT --")
+			show_mode("INSERT")
 		}
 
 		; enable / disable command hot keys
@@ -64,16 +64,23 @@ class CmdOBJ {
 	}
 }
 
-show_mode(msg){
+show_mode(mode){
+	
+	set := VAR[mode]
+	title := set["title"]
+	bg_color := set["bg_color"]
+	font_color := set["font_color"]
+	
+	
 		ww := A_ScreenWidth/2
 		hh := A_ScreenHeight - 58
 		Gui, PANEL:Destroy
         Gui, PANEL:+AlwaysOnTop +ToolWindow -Caption
-		Gui, PANEL:Color, 000000
+		Gui, PANEL:Color, %bg_color%
         Gui, PANEL:Font, s9 bold, Verdana
-        Gui, PANEL:Add, Text, cFF0000, %msg%
-        Gui, PANEL:Show,NoActivate x%ww% y%hh%, MODE_WINDOW
-		WinSet, Transparent, 200 , MODE_WINDOW	
+        Gui, PANEL:Add, Text, c%font_color%, -- %mode% --
+        Gui, PANEL:Show,NoActivate x%ww% y%hh%, %title%
+		WinSet, Transparent, 200 , %title%
 }
 
 #IfWinExist MODE_WINDOW
