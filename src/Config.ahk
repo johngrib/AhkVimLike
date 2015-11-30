@@ -16,9 +16,22 @@
 					this.cfg[sect][key] := ini_value
 				}
 			}
-			this.cfg["FENCE"]    := this.func_get_tray_location()
-			this.cfg["STAT_LOC"] := this.func_get_stat_location()
+			;this.cfg["FENCE"]       := this.func_get_tray_location()
+			this.cfg["STAT_LOC"]    := this.func_get_stat_location()
+			this.cfg["MONITOR_CNT"] := this.get_monitor_cnt()
+			
+			cnt := this.cfg["MONITOR_CNT"]
+			loop %cnt% {
+				SysGet, mon, Monitor, %A_Index%
+				name := "FENCE" . A_Index
+				this.cfg[name] := {"loc" : "down", "size" : 0, "width" : monRight - monLeft, "height" : monBottom - monTop, "x" : monLeft, "y" : monTop }
+			}
 		} ; // end of __New
+		
+		get_monitor_cnt(){
+			SysGet, cnt, MonitorCount
+			return cnt
+		}
 		
 		has_sect(str){
 			return this.cfg.HasKey(str)

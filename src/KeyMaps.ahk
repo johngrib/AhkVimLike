@@ -210,29 +210,39 @@ key_c(ByRef input_number){
 	window move
 */
 key_zq(ByRef input_number){
-	move_window(7, "A")
+	move_window(input_number, 7, "A")
 }
 key_zw(ByRef input_number){
-	move_window(8, "A")
+	move_window(input_number, 8, "A")
 }
 key_ze(ByRef input_number){
-	move_window(9, "A")
+	move_window(input_number, 9, "A")
 }
 key_za(ByRef input_number){
-	move_window(4, "A")
+	move_window(input_number, 4, "A")
 }
 key_zs(ByRef input_number){
-	move_window(5, "A")
+	move_window(input_number, 5, "A")
 }
 key_zd(ByRef input_number){
-	move_window(6, "A")
+	move_window(input_number, 6, "A")
 }
 key_zz(ByRef input_number){
-	move_window(1, "A")
+	move_window(input_number, 1, "A")
 }
 key_zx(ByRef input_number){
-	move_window(2, "A")
+	move_window(input_number, 2, "A")
 }
 key_zc(ByRef input_number){
-	move_window(3, "A")
+	move_window(input_number, 3, "A")
 }
+
+F12::
+	SysGet, monCount, MonitorCount
+	MsgBox % monCount
+	
+	SysGet, tmpMon, Monitor, 2
+	
+	MsgBox % tmpMonLeft . " : " . tmpMonRight . " : " . tmpMonTop . " : " . tmpMonBottom
+	
+return

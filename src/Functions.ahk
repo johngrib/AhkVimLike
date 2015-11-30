@@ -108,11 +108,17 @@ create_gui(id, title, msg, x, y, bg_color, font_color){
 /*
 	moves window to 1 2 3 4 5 6 7 8 9 location
 */
-move_window(var, title){
-    top   := CFG.get_value("FENCE", "y")
-    left  := CFG.get_value("FENCE", "x")
-    width := CFG.get_value("FENCE", "width")
-    height:= CFG.get_value("FENCE", "height")
+move_window(mon, var, title){
+
+	key := "FENCE" . mon
+	
+	if(not CFG.has_sect(key))
+		return
+	
+    top   := CFG.get_value(key, "y")
+    left  := CFG.get_value(key, "x")
+    width := CFG.get_value(key, "width")
+    height:= CFG.get_value(key, "height")
 
     xx := left, ww := Floor(width / 2)
     yy := top,  hh := Floor(height / 2)
