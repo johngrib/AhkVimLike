@@ -18,7 +18,7 @@ SendMode Input
 SetDefaultMouseSpeed, 0 
 SetKeyDelay, -1
 SetMouseDelay, -1
-SetWorkingDir %A_ScriptDir%
+;SetWorkingDir %A_ScriptDir%
 
 CapsLock & F5:: Reload
 CapsLock & F4:: ExitApp
@@ -26,20 +26,26 @@ CapsLock & F4:: ExitApp
 global MARK
 global CMD
 global STAT
-global STAT_LOC
 global CFG
+global KEYS
+global USER_HOME
 
 main(){
 	Static init := main()
+
+	USER_HOME := A_Desktop . "\..\.."
+	
 	CFG := new Config(".\ahkvimlike.ini")
 	
 	MARK := {}
 	STAT := {}
 	STAT["NORMAL"]   := CFG.get_sect("NORMAL")
 	STAT["INSERT"]   := CFG.get_sect("INSERT")
-	STAT["CAPSLOCK"] := CFG.get_sect("CAPSLOCK")		
-	STAT_LOC         := CFG.get_sect("STAT_LOC")
+	STAT["CAPSLOCK"] := CFG.get_sect("CAPSLOCK")
+
+	KEYS := func_get_key_maps()
 
 	CMD := new CmdOBJ("", "")
 	CMD.changeMode("auto")
 }
+

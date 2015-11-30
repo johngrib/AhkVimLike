@@ -3,21 +3,6 @@
 	@Author : johngrib82@gmail.com
 	@Created : 2015. NOV. 26
 */
-func_get_key_maps(){
-	; numbers 
-	command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
-
-	; normal commands
-	command_keymap.InsertAt(1, "$*i", "$*o",  "$z", "$x", "$+x", "$c", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$w","$a","$s","$d", "$m")
-
-	; mouse accelator 	[  ]  \
-	command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
-
-	; colon (+semi-colon) , single quote ( ' )
-	command_keymap.InsertAt(1, "$+VKBF", "$SC028")
-
-	return command_keymap
-}
 
 /*
 	x, +x : delete, backspace
@@ -244,12 +229,3 @@ key_zx(ByRef input_number){
 key_zc(ByRef input_number){
 	move_window(input_number, 3, "A")
 }
-
-F12::
-	SysGet, monCount, MonitorCount
-	MsgBox % monCount
-
-	SysGet, tmpMon, Monitor, 2
-
-	MsgBox % tmpMonLeft . " : " . tmpMonRight . " : " . tmpMonTop . " : " . tmpMonBottom	
-return

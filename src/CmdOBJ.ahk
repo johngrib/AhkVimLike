@@ -56,10 +56,11 @@ class CmdOBJ {
 				show_mode("INSERT")
 			}
 			; enable / disable command hot keys
-			command_keymap := func_get_key_maps()
-			cnt := command_keymap.Length()
+			
+			;command_keymap := func_get_key_maps()
+			cnt := KEYS.Length()
 			Loop %cnt% {
-				target_key := command_keymap[A_Index]
+				target_key := KEYS[A_Index]
 				Hotkey, %target_key%, %option%
 			}
 			return

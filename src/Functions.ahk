@@ -3,6 +3,23 @@
 	@Author : johngrib82@gmail.com
 	@Created : 2015. NOV. 25
 */
+
+func_get_key_maps(){
+	; numbers
+	command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
+
+	; normal commands
+	command_keymap.InsertAt(1, "$*i", "$*o",  "$z", "$x", "$+x", "$c", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$w","$a","$s","$d", "$m")
+
+	; mouse accelator 	[  ]  \
+	command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
+
+	; colon (+semi-colon) , single quote ( ' )
+	command_keymap.InsertAt(1, "$+VKBF", "$SC028")
+
+	return command_keymap
+}
+
 func_hjkl_move(key, ByRef cnt){
 	Send {%key% %cnt%}
 	CMD.set_num("")
@@ -88,8 +105,10 @@ show_mode(msg){
 	
 	bg_color := CFG.get_value(mode, "bg_color")
 	font_color := CFG.get_value(mode, "font_color")
+    xx := CFG.get_value("STAT_LOC", "x")
+    yy := CFG.get_value("STAT_LOC", "y")
 
-	create_gui("PANEL", set["_title"], msg, STAT_LOC["x"], STAT_LOC["y"], bg_color, font_color)
+	create_gui("PANEL", set["_title"], msg, xx, yy, bg_color, font_color)
 }
 
 /*

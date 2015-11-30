@@ -131,3 +131,29 @@ command_time(args){
 command_list(args){
 	ListVars
 }
+
+/*
+	open startup folder
+*/
+command_startup(args){
+	run, shell:Startup
+}
+
+/*
+	open everything
+*/
+command_run(args){
+	txt := args[2]
+	run %txt%
+}
+
+/*
+	open my computer
+*/
+command_mycom(args){
+	Run ::{20d04fe0-3aea-1069-a2d8-08002b30309d}	
+}
+
+command_trash(args){
+	Run ::{645ff040-5081-101b-9f08-00aa002f954e} 
+}

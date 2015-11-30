@@ -164,6 +164,7 @@ return
 	k : up
 	l : right
 */
+
 #If GetKeyState("capslock","T") and StrLen(CMD.get_num()) < 1
 		*h:: Left
 		*j:: Down
