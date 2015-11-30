@@ -68,27 +68,3 @@ class CmdOBJ {
 			return
 		}
 }
-
-show_mode(msg){
-	
-	if(STAT.HasKey(msg))
-		mode := msg
-	else
-		mode := "NORMAL"
-
-	set := STAT[mode]
-	bg_color := CFG.get_value(mode, "bg_color")
-	font_color := CFG.get_value(mode, "font_color")
-
-	create_gui("PANEL", set["title"], msg, STAT_LOC["x"], STAT_LOC["y"], bg_color, font_color)
-}
-
-create_gui(id, title, msg, x, y, bg_color, font_color){
-		Gui, %id%:Destroy
-        Gui, %id%:+AlwaysOnTop +ToolWindow -Caption
-		Gui, %id%:Color, %bg_color%
-        Gui, %id%:Font, s9 bold, Verdana
-        Gui, %id%:Add, Text, c%font_color%, -- %msg% --
-        Gui, %id%:Show,NoActivate x%x% y%y%, %title%
-		WinSet, Transparent, 220 , %title%
-}

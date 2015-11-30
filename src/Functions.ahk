@@ -63,25 +63,28 @@ func_win_memorize(num) {
     return	
 }
 
-func_get_tray_location(){
-	WinGetPos,xx,yy,ww,hh,ahk_class Shell_TrayWnd,,,
-	if( ww > hh and yy > 0 )
-		return {"loc" : "down", "size" : hh}
-	else if( ww < hh and yy = 0 )
-		return {"loc" : "left", "size" : hh}
-	else if( ww < hh and xx > 0 )
-		return {"loc" : "right", "size" : hh}
+
+show_mode(msg){
+
+	if(STAT.HasKey(msg))
+		mode := msg
 	else
-		return {"loc" : "up", "size" : hh}
+		mode := "NORMAL"
+
+	set := STAT[mode]
+	
+	bg_color := CFG.get_value(mode, "bg_color")
+	font_color := CFG.get_value(mode, "font_color")
+
+	create_gui("PANEL", set["_title"], msg, STAT_LOC["x"], STAT_LOC["y"], bg_color, font_color)
 }
 
-func_get_stat_location(){
-	tray_info := func_get_tray_location()
-	loc := tray_info["loc"]
-	size := tray_info["size"]
-
-	if( loc = "down" )
-		return {"x" : Floor(A_ScreenWidth/2), "y" : A_ScreenHeight - size - STAT_HEIGHT }
-	else
-		return {"x" : A_ScreenWidth/2, "y" : A_ScreenHeight - STAT_HEIGHT }
+create_gui(id, title, msg, x, y, bg_color, font_color){
+		Gui, %id%:Destroy
+        Gui, %id%:+AlwaysOnTop +ToolWindow -Caption
+		Gui, %id%:Color, %bg_color%
+        Gui, %id%:Font, s9 bold, Verdana
+        Gui, %id%:Add, Text, c%font_color%, -- %msg% --
+        Gui, %id%:Show,NoActivate x%x% y%y%, %title%
+		WinSet, Transparent, 220 , %title%
 }

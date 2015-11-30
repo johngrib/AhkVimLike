@@ -125,6 +125,9 @@ command_time(args){
 	InputBox, time, time, , , 300, 110, , , , , %TimeString%
 }
 
+/*
+	show variables list
+*/
 command_list(args){
 	ListVars
 }
