@@ -77,7 +77,10 @@ show_mode(msg){
 		mode := "NORMAL"
 
 	set := STAT[mode]
-	create_gui("PANEL", set["title"], msg, STAT_LOC["x"], STAT_LOC["y"], set["bg_color"], set["font_color"])
+	bg_color := CFG.get_value(mode, "bg_color")
+	font_color := CFG.get_value(mode, "font_color")
+
+	create_gui("PANEL", set["title"], msg, STAT_LOC["x"], STAT_LOC["y"], bg_color, font_color)
 }
 
 create_gui(id, title, msg, x, y, bg_color, font_color){
