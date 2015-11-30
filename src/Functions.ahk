@@ -62,3 +62,26 @@ func_win_memorize(num) {
 	MARK[num] := activeWin
     return	
 }
+
+func_get_tray_location(){
+	WinGetPos,xx,yy,ww,hh,ahk_class Shell_TrayWnd,,,
+	if( ww > hh and yy > 0 )
+		return {"loc" : "down", "size" : hh}
+	else if( ww < hh and yy = 0 )
+		return {"loc" : "left", "size" : hh}
+	else if( ww < hh and xx > 0 )
+		return {"loc" : "right", "size" : hh}
+	else
+		return {"loc" : "up", "size" : hh}
+}
+
+func_get_stat_location(){
+	tray_info := func_get_tray_location()
+	loc := tray_info["loc"]
+	size := tray_info["size"]
+
+	if( loc = "down" )
+		return {"x" : Floor(A_ScreenWidth/2), "y" : A_ScreenHeight - size - STAT_HEIGHT }
+	else
+		return {"x" : A_ScreenWidth/2, "y" : A_ScreenHeight - STAT_HEIGHT }
+}

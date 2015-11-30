@@ -1,95 +1,91 @@
+/*
+	command object
+	@Author : johngrib82@gmail.com
+	@Created : 2015. NOV. 29
+*/
 class CmdOBJ {
-    __New(cmd, num) {
-		this.cmd := cmd
-		this.num := num
-    }
-	set_cmd(cmd){
-		this.cmd := cmd
-	}
-	set_num(num){
-		this.num := num
-	}
-	get_num(){
-		return this.num
-	}
-	get_cmd(){
-		return this.cmd
-	}
-	get_num_cmd(){
-		return this.num . this.cmd
-	}
-	append_num(num){
-		this.num := this.num . num
-	}
-	append_cmd(cmd){
-		this.cmd := this.cmd . cmd
-	}
-	clear(str){
-		if(str = "auto"){
-			this.cmd := ""
-			this.num := ""
-			this.changeMode("auto")
-		} else if(str = "num") {
-			this.num := ""
-		} else if(str = "cmd") {
-			this.cmd := ""
+		__New(cmd, num) {
+			this.cmd := cmd
+			this.num := num
 		}
-	}
-	/* 
-		capslock mode changer
-	*/
-	changeMode(opt){
-		KeyWait, CapsLock
-		GetKeyState, lockState, CapsLock, T)
-		If(lockState = "D" && opt == "auto")	{
-			option = on
-			show_mode("NORMAL")
-		} else If(lockState = "D" && opt == "caps")	{
-			option = off
-			show_mode("CAPSLOCK")
-		} else {
-			option = off
-			show_mode("INSERT")
+		set_cmd(cmd){
+			this.cmd := cmd
 		}
+		set_num(num){
+			this.num := num
+		}
+		get_num(){
+			return this.num
+		}
+		get_cmd(){
+			return this.cmd
+		}
+		get_num_cmd(){
+			return this.num . this.cmd
+		}
+		append_num(num){
+			this.num := this.num . num
+		}
+		append_cmd(cmd){
+			this.cmd := this.cmd . cmd
+		}
+		clear(str){
+			if(str = "auto"){
+				this.cmd := ""
+				this.num := ""
+				this.changeMode("auto")
+			} else if(str = "num") {
+				this.num := ""
+			} else if(str = "cmd") {
+				this.cmd := ""
+			}
+		}
+		/* 
+			capslock mode changer
+		*/
+		changeMode(opt){
+			KeyWait, CapsLock
+			GetKeyState, lockState, CapsLock, T)
+			If(lockState = "D" && opt == "auto")	{
+				option = on
+				show_mode("NORMAL")
+			} else If(lockState = "D" && opt == "caps")	{
+				option = off
+				show_mode("CAPSLOCK")
+			} else {
+				option = off
+				show_mode("INSERT")
+			}
 
-		; enable / disable command hot keys
-		command_keymap := func_get_key_maps()
-		cnt := command_keymap.Length()
-		Loop %cnt%
-		{
-			target_key := command_keymap[A_Index]
-			Hotkey, %target_key%, %option%
+			; enable / disable command hot keys
+			command_keymap := func_get_key_maps()
+			cnt := command_keymap.Length()
+			Loop %cnt%
+			{
+				target_key := command_keymap[A_Index]
+				Hotkey, %target_key%, %option%
+			}
+			return
 		}
-		return
-	}
 }
 
 show_mode(msg){
 	
-	if(STAT.HasKey(msg)){
+	if(STAT.HasKey(msg))
 		mode := msg
-	} else {
+	else
 		mode := "NORMAL"
-	}
-	set := STAT[mode]
-	title := set["title"]
-	bg_color := set["bg_color"]
-	font_color := set["font_color"]
 
-		xx := A_ScreenWidth/2
-		yy := A_ScreenHeight - 58
-		Gui, PANEL:Destroy
-        Gui, PANEL:+AlwaysOnTop +ToolWindow -Caption
-		Gui, PANEL:Color, %bg_color%
-        Gui, PANEL:Font, s9 bold, Verdana
-        Gui, PANEL:Add, Text, c%font_color%, -- %msg% --
-        Gui, PANEL:Show,NoActivate x%xx% y%yy%, %title%
-		WinSet, Transparent, 220 , %title%
+	set := STAT[mode]
+	create_gui("PANEL", set["title"], msg, STAT_LOC["x"], STAT_LOC["y"], set["bg_color"], set["font_color"])
 }
 
-#IfWinExist MODE_WINDOW
-F10::
-	WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
-	MsgBox % TH
-return
-#if
+create_gui(id, title, msg, x, y, bg_color, font_color){
+		Gui, %id%:Destroy
+        Gui, %id%:+AlwaysOnTop +ToolWindow -Caption
+		Gui, %id%:Color, %bg_color%
+        Gui, %id%:Font, s9 bold, Verdana
+        Gui, %id%:Add, Text, c%font_color%, -- %msg% --
+        Gui, %id%:Show,NoActivate x%x% y%y%, %title%
+		WinSet, Transparent, 220 , %title%
+}
