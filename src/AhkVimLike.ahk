@@ -25,15 +25,15 @@ CapsLock & F4:: ExitApp
 
 global MARK
 global CMD
-global VAR
+global STAT
 
 main(){
 	Static init := main()
 	MARK := {}
-	VAR := {}
-	VAR["NORMAL"] := {"title": "avl_normal", "bg_color": "000000", "font_color": "FF0000" }
-	VAR["INSERT"] := {"title": "avl_insert", "bg_color": "3F51B5", "font_color": "FFFFFF" }
-	VAR["CAPSLOCK"] := {"title": "avl_capslock", "bg_color": "FF4081", "font_color": "FFFFFF" }
+	STAT := {}
+	STAT["NORMAL"] := {"title": "avl_normal", "bg_color": "000000", "font_color": "FF0000" }
+	STAT["INSERT"] := {"title": "avl_insert", "bg_color": "3F51B5", "font_color": "FFFFFF" }
+	STAT["CAPSLOCK"] := {"title": "avl_capslock", "bg_color": "FF4081", "font_color": "FFFFFF" }
 	
 	CMD := new CmdOBJ("", "")
 	CMD.changeMode("auto")

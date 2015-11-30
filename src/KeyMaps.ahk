@@ -8,16 +8,13 @@ func_get_key_maps(){
 	command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
 
 	; normal commands
-	command_keymap.InsertAt(1, "$*i", "$*o",  "$*x", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$w","$a","$s","$d", "$m")
+	command_keymap.InsertAt(1, "$*i", "$*o",  "$*z", "$*x", "$*c", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$w","$a","$s","$d", "$m")
 
 	; mouse accelator 	[  ]  \
 	command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
 
 	; colon (+semi-colon) , single quote ( ' )
 	command_keymap.InsertAt(1, "$+VKBF", "$SC028")
-
-	;command_keymap.InsertAt(1, "$*h", "$*j", "$*k", "$*l")
-	command_keymap.InsertAt(1, "$Space", "Space & q", "Space & w", "Space & e", "Space & a", "Space & s", "Space & d", "Space & z", "Space & x", "Space & c")
 
 	return command_keymap
 }
@@ -153,4 +150,58 @@ key_gr(ByRef input_number) {
 }
 
 key_t(ByRef input_number){
+}
+
+
+
+key_gq(ByRef input_number){
+	MouseMove, 2, 0
+}
+
+key_gw(ByRef input_number){
+	WinGet, winid ,, A
+	WinGetActiveStats, winid, ww, hh, xx, yy
+	MouseMove, ww/2, 0
+}
+
+key_ge(ByRef input_number){
+	WinGet, winid ,, A
+	WinGetActiveStats, winid, ww, hh, xx, yy
+	MouseMove, ww - 2, 0
+}
+
+key_ga(ByRef input_number){
+	WinGet, winid ,, A
+	WinGetActiveStats, winid, ww, hh, xx, yy
+	MouseMove, 2, hh/2	
+}
+
+key_gs(ByRef input_number){
+	WinGet, winid ,, A
+	WinGetActiveStats, winid, ww, hh, xx, yy
+	MouseMove, ww/2, hh/2	
+}
+	
+key_gd(ByRef input_number){
+	WinGet, winid ,, A
+	WinGetActiveStats, winid, ww, hh, xx, yy
+	MouseMove, ww - 2, hh/2	
+}
+
+key_gz(ByRef input_number){
+	WinGet, winid ,, A
+	WinGetActiveStats, winid, ww, hh, xx, yy
+	MouseMove, 2, hh - 2	
+}
+
+key_gx(ByRef input_number){
+	WinGet, winid ,, A
+	WinGetActiveStats, winid, ww, hh, xx, yy
+	MouseMove, ww/2, hh - 2
+}
+	
+key_gc(ByRef input_number){
+	WinGet, winid ,, A
+	WinGetActiveStats, winid, ww, hh, xx, yy
+	MouseMove, ww -2, hh - 2 
 }

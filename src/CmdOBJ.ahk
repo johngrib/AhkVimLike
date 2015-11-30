@@ -64,23 +64,27 @@ class CmdOBJ {
 	}
 }
 
-show_mode(mode){
+show_mode(msg){
 	
-	set := VAR[mode]
+	if(STAT.HasKey(msg)){
+		mode := msg
+	} else {
+		mode := "NORMAL"
+	}
+	set := STAT[mode]
 	title := set["title"]
 	bg_color := set["bg_color"]
 	font_color := set["font_color"]
-	
-	
-		ww := A_ScreenWidth/2
-		hh := A_ScreenHeight - 58
+
+		xx := A_ScreenWidth/2
+		yy := A_ScreenHeight - 58
 		Gui, PANEL:Destroy
         Gui, PANEL:+AlwaysOnTop +ToolWindow -Caption
 		Gui, PANEL:Color, %bg_color%
         Gui, PANEL:Font, s9 bold, Verdana
-        Gui, PANEL:Add, Text, c%font_color%, -- %mode% --
-        Gui, PANEL:Show,NoActivate x%ww% y%hh%, %title%
-		WinSet, Transparent, 200 , %title%
+        Gui, PANEL:Add, Text, c%font_color%, -- %msg% --
+        Gui, PANEL:Show,NoActivate x%xx% y%yy%, %title%
+		WinSet, Transparent, 220 , %title%
 }
 
 #IfWinExist MODE_WINDOW
