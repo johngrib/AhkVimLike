@@ -16,9 +16,8 @@
 					this.cfg[sect][key] := ini_value
 				}
 			}
-
+			this.cfg["FENCE"]    := this.func_get_tray_location()
 			this.cfg["STAT_LOC"] := this.func_get_stat_location()
-			
 		} ; // end of __New
 		
 		has_sect(str){
@@ -53,7 +52,7 @@
 			return value
 		}
 		func_get_stat_location(){
-			tray_info := this.func_get_tray_location()
+			tray_info := this.cfg["FENCE"]
 			loc := tray_info["loc"]
 			size := tray_info["size"]
 
@@ -61,18 +60,18 @@
 			if( loc = "down" )
 				return {"x" : Floor(A_ScreenWidth/2), "y" : A_ScreenHeight - size - height }
 			else
-				return {"x" : A_ScreenWidth/2, "y" : A_ScreenHeight - height }
+				return {"x" : Floor(A_ScreenWidth/2), "y" : A_ScreenHeight - height }
 		}
 		func_get_tray_location(){
 			WinGetPos,xx,yy,ww,hh,ahk_class Shell_TrayWnd,,,
 			if( ww > hh and yy > 0 )
-				return {"loc" : "down", "size" : hh}
-			else if( ww < hh and yy = 0 )
-				return {"loc" : "left", "size" : hh}
+				return {"loc" : "down", "size" : hh, "width" : A_ScreenWidth, "height" : A_ScreenHeight - hh, "x" : 0, "y" : 0 }
+			else if( ww < hh and yy = 0 and xx = 0)
+				return {"loc" : "left", "size" : hh, "width" : A_ScreenWidth - ww, "height" : A_ScreenHeight, "x" : ww, "y" : 0 }
 			else if( ww < hh and xx > 0 )
-				return {"loc" : "right", "size" : hh}
+				return {"loc" : "right", "size" : hh, "width" : A_ScreenWidth - ww, "height" : A_ScreenHeight, "x" : 0, "y" : 0  }
 			else
-				return {"loc" : "up", "size" : hh}
+				return {"loc" : "up", "size" : hh, "width" : A_ScreenWidth, "height" : A_ScreenHeight - hh, "x" : 0, "y" : hh  }
 		}
 		get_stat_height(){
 			create_gui("PANEL", "size_test", "NORMAL", -100, -100, "000000", "FFFFFF")

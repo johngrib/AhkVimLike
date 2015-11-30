@@ -40,9 +40,8 @@ class CmdOBJ {
 				this.cmd := ""
 			}
 		}
-		/* 
-			capslock mode changer
-		*/
+
+	;// capslock mode changer
 		changeMode(opt){
 			KeyWait, CapsLock
 			GetKeyState, lockState, CapsLock, T)
@@ -56,12 +55,10 @@ class CmdOBJ {
 				option = off
 				show_mode("INSERT")
 			}
-
 			; enable / disable command hot keys
 			command_keymap := func_get_key_maps()
 			cnt := command_keymap.Length()
-			Loop %cnt%
-			{
+			Loop %cnt% {
 				target_key := command_keymap[A_Index]
 				Hotkey, %target_key%, %option%
 			}

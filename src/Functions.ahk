@@ -9,6 +9,9 @@ func_hjkl_move(key, ByRef cnt){
 	CMD.changeMode("auto")
 }
 
+/*
+	mouse move
+*/
 func_mouse_move( ww, aa, ss, dd ) {
 	; mouse pointer move distance
 	; n + wasd : long distance
@@ -35,7 +38,9 @@ func_mouse_move( ww, aa, ss, dd ) {
 return
 }
 
-
+/*
+	mode change by i, o
+*/
 func_i_o() {
 	SetCapsLockState, Off
 	GetKeyState, isShiftDown, Shift, P
@@ -51,19 +56,27 @@ func_i_o() {
 	}
 }
 
+/*
+	goto bookmarked window
+*/
 func_win_mem_activate(num){	
 	win_id := MARK[num]
 	WinActivate ahk_id %win_id%
 	return
 }
 
+/*
+	bookmark window
+*/
 func_win_memorize(num) {
 	activeWin := WinExist("A")
 	MARK[num] := activeWin
     return	
 }
 
-
+/*
+	shows mode on gui
+*/
 show_mode(msg){
 
 	if(STAT.HasKey(msg))
@@ -79,6 +92,9 @@ show_mode(msg){
 	create_gui("PANEL", set["_title"], msg, STAT_LOC["x"], STAT_LOC["y"], bg_color, font_color)
 }
 
+/*
+	shows gui
+*/
 create_gui(id, title, msg, x, y, bg_color, font_color){
 		Gui, %id%:Destroy
         Gui, %id%:+AlwaysOnTop +ToolWindow -Caption
@@ -87,4 +103,31 @@ create_gui(id, title, msg, x, y, bg_color, font_color){
         Gui, %id%:Add, Text, c%font_color%, -- %msg% --
         Gui, %id%:Show,NoActivate x%x% y%y%, %title%
 		WinSet, Transparent, 220 , %title%
+}
+
+/*
+	moves window to 1 2 3 4 5 6 7 8 9 location
+*/
+move_window(var, title){
+    top   := CFG.get_value("FENCE", "y")
+    left  := CFG.get_value("FENCE", "x")
+    width := CFG.get_value("FENCE", "width")
+    height:= CFG.get_value("FENCE", "height")
+
+    xx := left, ww := Floor(width / 2)
+    yy := top,  hh := Floor(height / 2)
+
+    if(var <= 3){
+		yy := top + hh
+    } else if(var <= 6){
+		hh := height
+    }
+    
+    if(2 = Mod(var, 3))    {
+   	 ww := width
+    } else if(0 = Mod(var, 3)) {
+   	 xx := left + width / 2
+    }
+
+	WinMove, % title, , xx, yy, ww, hh
 }

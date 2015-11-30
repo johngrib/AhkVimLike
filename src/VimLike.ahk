@@ -109,7 +109,7 @@ return
 
 			clear_command := %func_name%(CMD.get_num())
 			clear_command = 1
-		} else if( 2 < StrLen(CMD.get_cmd())){
+		} else if( 1 < StrLen(CMD.get_cmd())){
 			clear_command = 1
 		}
 

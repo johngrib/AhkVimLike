@@ -149,11 +149,6 @@ key_gr(ByRef input_number) {
 	Send, ^{PGUP %input_number%}
 }
 
-key_t(ByRef input_number){
-}
-
-
-
 key_gq(ByRef input_number){
 	MouseMove, 2, 0
 }
@@ -204,4 +199,40 @@ key_gc(ByRef input_number){
 	WinGet, winid ,, A
 	WinGetActiveStats, winid, ww, hh, xx, yy
 	MouseMove, ww -2, hh - 2 
+}
+
+key_t(ByRef input_number){
+}
+key_c(ByRef input_number){
+}
+
+/*
+	window move
+*/
+key_zq(ByRef input_number){
+	move_window(7, "A")
+}
+key_zw(ByRef input_number){
+	move_window(8, "A")
+}
+key_ze(ByRef input_number){
+	move_window(9, "A")
+}
+key_za(ByRef input_number){
+	move_window(4, "A")
+}
+key_zs(ByRef input_number){
+	move_window(5, "A")
+}
+key_zd(ByRef input_number){
+	move_window(6, "A")
+}
+key_zz(ByRef input_number){
+	move_window(1, "A")
+}
+key_zx(ByRef input_number){
+	move_window(2, "A")
+}
+key_zc(ByRef input_number){
+	move_window(3, "A")
 }
