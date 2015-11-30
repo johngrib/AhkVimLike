@@ -83,6 +83,7 @@ return
 	$d::
 	$z::
 	$x::
+	$+x::
 	$c::
 	$m::
 	$SC028::  ;  '
@@ -103,10 +104,6 @@ return
 		; if command and function name matched, call function
 		; commands length should shorter than 3
 		if( IsFunc( func_name) ) {
-
-			if(CMD.get_num() = "")
-				CMD.set_num("1")
-
 			clear_command := %func_name%(CMD.get_num())
 			clear_command = 1
 		} else if( 1 < StrLen(CMD.get_cmd())){

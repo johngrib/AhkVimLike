@@ -8,7 +8,7 @@ func_get_key_maps(){
 	command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
 
 	; normal commands
-	command_keymap.InsertAt(1, "$*i", "$*o",  "$z", "$x", "$c", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$w","$a","$s","$d", "$m")
+	command_keymap.InsertAt(1, "$*i", "$*o",  "$z", "$x", "$+x", "$c", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$w","$a","$s","$d", "$m")
 
 	; mouse accelator 	[  ]  \
 	command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
@@ -35,7 +35,7 @@ key_x(ByRef input_number){
 	0 : Home
 */
 key_0(ByRef input_number) {
-	Send, {Home}	
+	Send, {Home}
 }
 /*
 	$ : End
@@ -57,7 +57,7 @@ key_r(ByRef input_number) {
 	^f : Page Down
 */
 key_f(ByRef input_number) {
-	if( GetKeyState("Control") = 1)
+	if( GetKeyState("Control") )
 		Send, {PGDN %input_number%}
 	else
 		MouseClick, WheelDown, , , input_number
@@ -67,7 +67,7 @@ key_f(ByRef input_number) {
 	^b : Page Up
 */
 key_b(ByRef input_number) {
-	if( GetKeyState("Control") = 1)
+	if( GetKeyState("Control") )
 		Send, {PGUP %input_number%}
 }
 
@@ -108,16 +108,24 @@ key_e(ByRef input_number) {
 	s : down
 	d : right
 */
-key_w(ByRef input_number) {	
+key_w(ByRef input_number) {
+	if(input_number = "")
+		input_number = 1
 	func_mouse_move( input_number , 1, 1, 1 )
 }
 key_a(ByRef input_number) {
+	if(input_number = "")
+		input_number = 1
 	func_mouse_move( 1, input_number, 1, 1 )
 }
 key_s(ByRef input_number) {
+	if(input_number = "")
+		input_number = 1
 	func_mouse_move( 1, 1, input_number, 1 )
 }
 key_d(ByRef input_number) {
+	if(input_number = "")
+		input_number = 1
 	func_mouse_move( 1, 1, 1, input_number )
 }
 
@@ -240,9 +248,8 @@ key_zc(ByRef input_number){
 F12::
 	SysGet, monCount, MonitorCount
 	MsgBox % monCount
-	
+
 	SysGet, tmpMon, Monitor, 2
-	
-	MsgBox % tmpMonLeft . " : " . tmpMonRight . " : " . tmpMonTop . " : " . tmpMonBottom
-	
+
+	MsgBox % tmpMonLeft . " : " . tmpMonRight . " : " . tmpMonTop . " : " . tmpMonBottom	
 return
