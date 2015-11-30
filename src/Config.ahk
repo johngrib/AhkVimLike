@@ -1,4 +1,8 @@
 ﻿class Config {
+		
+		/*
+			Contructor
+		*/
 		__New(file_address) {
 			this.file_address := file_address
 			
@@ -16,41 +20,62 @@
 					this.cfg[sect][key] := ini_value
 				}
 			}
-			;this.cfg["FENCE"]       := this.func_get_tray_location()
-			this.cfg["STAT_LOC"]    := this.func_get_stat_location()
+
 			this.cfg["MONITOR_CNT"] := this.get_monitor_cnt()
-			
 			cnt := this.cfg["MONITOR_CNT"]
 			loop %cnt% {
 				SysGet, mon, Monitor, %A_Index%
 				name := "FENCE" . A_Index
 				this.cfg[name] := {"loc" : "down", "size" : 0, "width" : monRight - monLeft, "height" : monBottom - monTop, "x" : monLeft, "y" : monTop }
 			}
+			this.cfg["FENCE"]       := this.func_get_tray_location()
+			this.cfg["STAT_LOC"]    := this.func_get_stat_location()
+			
+
+
 		} ; // end of __New
 		
+		/*
+			get monitor count
+		*/
 		get_monitor_cnt(){
 			SysGet, cnt, MonitorCount
 			return cnt
 		}
 		
+		/*
+			check config section
+		*/
 		has_sect(str){
 			return this.cfg.HasKey(str)
 		}
 		
+		/*
+			get section config
+		*/
 		get_sect(str){
 			return this.cfg[str]
 		}
 
+		/*
+			get section-key value
+		*/
 		get_value(sect, key){
 			return this.cfg[sect][key]
 		}
 		
+		/*
+			get value from ini file
+		*/
 		get_ini_value(sect, key, default_value){
 			file := this.file_address
 			IniRead, value, %file%, %sect%, %key%, %default_value%
 			return value
 		}
 		
+		/*
+			ini value validate check 
+		*/
 		is_invalid_value( key, value ) {
 			if(RegExMatch( key , "^_"))
 				return false
@@ -59,11 +84,18 @@
 				 return not RegExMatch( value, "^[0-9a-fA-F]{6}$" )
 		}
 	
+		/*
+			fix unvalid value in ini file
+		*/
 		fix_ini_value( sect, key, value ){
 			file := this.file_address
 			IniWrite, %value%, %file%, %sect%, %key%
 			return value
 		}
+		
+		/*
+			
+		*/
 		func_get_stat_location(){
 			tray_info := this.cfg["FENCE"]
 			loc := tray_info["loc"]
