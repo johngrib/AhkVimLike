@@ -44,6 +44,38 @@ return
 #if
 
 /*
+	colon to input command mode
+*/
+#If GetKeyState("capslock","T")
+	$+SC027::	;  : (colon) command
+		
+		SetCapsLockState, Off
+		CMD.changeMode("auto")
+		
+		Gui +LastFound +OwnDialogs +AlwaysOnTop
+		
+		title := "input_command"
+		contents := ""
+		InputBox, input_sentence, %title%, %contents%, ,300, 110
+		input_sentence := Trim(input_sentence)
+		
+		args := StrSplit(input_sentence, " ")
+		args[0] := input_sentence
+		
+		if(args.Length() < 1){
+			return
+		}
+		func_name := "command_" . args[1]
+		
+		if( IsFunc( func_name ) ) {
+			%func_name%(args)
+		}
+		SetCapsLockState, On
+		CMD.clear("auto")
+	return
+#If
+
+/*
 	number commands : numbers works like VIM
 */
 $0::
@@ -84,87 +116,56 @@ $*o::
 	func_i_o()
 return
 
+/* 
+	commands (joinable with number)
+*/
+$*g::
+$*t::
+$*r::
+$*b::
+$*f::
+$*q::
+$*e::
+$w::
+$a::
+$s::
+$d::
+$z::
+$x::
+$+x::
+$c::
+$m::
+$SC028::  ;  '
+	; get hot_key
+	hot_key := A_ThisHotkey
+	
+	if(A_ThisHotkey = "$SC028"){
+		hot_key := "'"
+	} else if(RegExMatch(A_ThisHotkey, "^\W")){
+		StringTrimLeft, hot_key, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
+	}
+	
+	; join previous command with current command
+	CMD.append_cmd(hot_key)
+	func_name := "key_" . CMD.get_cmd()
+	clear_command := 0
 
-	/* 
-		commands (joinable with number)
-	*/
-	$*g::
-	$*t::
-	$*r::
-	$*b::
-	$*f::
-	$*q::
-	$*e::
-	$w::
-	$a::
-	$s::
-	$d::
-	$z::
-	$x::
-	$+x::
-	$c::
-	$m::
-	$SC028::  ;  '
-		; get hot_key
-		hot_key := A_ThisHotkey
-		
-		if(A_ThisHotkey = "$SC028"){
-			hot_key := "'"
-		} else if(RegExMatch(A_ThisHotkey, "^\W")){
-			StringTrimLeft, hot_key, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
-		}
-		
-		; join previous command with current command
-		CMD.append_cmd(hot_key)
-		func_name := "key_" . CMD.get_cmd()
-		clear_command := 0
+	; if command and function name matched, call function
+	; commands length should shorter than 3
+	if( IsFunc( func_name) ) {
+		clear_command := %func_name%(CMD.get_num())
+		clear_command = 1
+	} else if( 1 < StrLen(CMD.get_cmd())){
+		clear_command = 1
+	}
 
-		; if command and function name matched, call function
-		; commands length should shorter than 3
-		if( IsFunc( func_name) ) {
-			clear_command := %func_name%(CMD.get_num())
-			clear_command = 1
-		} else if( 1 < StrLen(CMD.get_cmd())){
-			clear_command = 1
-		}
-
-		if(clear_command = 1){
-			CMD.clear("auto")
-			return
-		}
-
-        show_mode(CMD.get_num_cmd())
-	return
-
-#If GetKeyState("capslock","T")
-	$+SC027::	;  : (colon) command
-		
-		SetCapsLockState, Off
-		CMD.changeMode("auto")
-
-		Gui +LastFound +OwnDialogs +AlwaysOnTop
-
-		title := "input_command"
-		contents := ""
-		InputBox, input_sentence, %title%, %contents%, ,300, 110
-		input_sentence := Trim(input_sentence)
-
-		args := StrSplit(input_sentence, " ")
-		args[0] := input_sentence
-
-		if(args.Length() < 1){
-			return
-		}
-		func_name := "command_" . args[1]
-		
-		if( IsFunc( func_name ) ) {
-			%func_name%(args)
-		}
-
-		SetCapsLockState, On
+	if(clear_command = 1){
 		CMD.clear("auto")
-	return
-#If
+		return
+	}
+
+	show_mode(CMD.get_num_cmd())
+return
 
 /*
 	mouse pointer accelator
@@ -172,23 +173,22 @@ return
 	m + w a s d
 	, + w a s d
 */
-    $SC01A::return	;  [
-    $SC01B::return	;  ]
-    $SC02B::return	;  \
+$SC01A::return	;  [
+$SC01B::return	;  ]
+$SC02B::return	;  \
 
 /*
 	help
 */
-	$+VKBF::Run, ".\manual.html"
+$+VKBF::Run, ".\manual.html"
 	
-	/*
+/*
 	h j k l moves
 	h : left
 	j : down
 	k : up
 	l : right
 */
-
 #If GetKeyState("capslock","T") and StrLen(CMD.get_num()) < 1
 		*h:: Left
 		*j:: Down
