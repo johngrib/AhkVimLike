@@ -121,8 +121,10 @@ return
 	$+SC027::	;  : (colon) command
 		SetCapsLockState, Off
 		CMD.changeMode("auto")
-		
-		title := "input command"
+
+		Gui +LastFound +OwnDialogs +AlwaysOnTop
+
+		title := "input_command"
 		contents := ""
 		InputBox, input_sentence, %title%, %contents%, ,300, 110
 		input_sentence := Trim(input_sentence)
