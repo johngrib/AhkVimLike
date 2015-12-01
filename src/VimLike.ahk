@@ -5,9 +5,9 @@
 
 /*	
 	Capslock is mode changer in this program
-	command  - Mode like VIM. (Arrow keys and Mouse controls)
-	insert   - Normal key input mode.
-	capslock - Normal Capslock mode.
+	NORMAL   - Mode like VIM. (Arrow keys and Mouse controls)
+	INSERT   - Normal key input mode.
+	CAPSLOCK - Normal Capslock mode.
 */
 CapsLock::
 +Capslock::
@@ -24,6 +24,24 @@ CapsLock::
 	}
 	Send, {LShift up}
 return
+
+/*
+	double click 'ESC' key to NORMAL mode
+*/
+#If GetKeyState("capslock","T") = 0
+	$Esc::
+	    if (A_PriorHotKey = "$Esc" and A_TimeSincePriorHotKey < 500) {
+			SetCapsLockState, On
+			CMD.changeMode("auto")	
+		} else {
+			#IfWinActive, ahk_class SWT_Window0
+				if(IME_CHECK("A"))
+					Send, {VK15}    ; input Korean/English switch key
+			#If
+			SendInput {Esc}
+		}
+	return
+#if
 
 /*
 	number commands : numbers works like VIM
@@ -118,7 +136,9 @@ return
         show_mode(CMD.get_num_cmd())
 	return
 
+#If GetKeyState("capslock","T")
 	$+SC027::	;  : (colon) command
+		
 		SetCapsLockState, Off
 		CMD.changeMode("auto")
 
@@ -144,6 +164,7 @@ return
 		SetCapsLockState, On
 		CMD.clear("auto")
 	return
+#If
 
 /*
 	mouse pointer accelator

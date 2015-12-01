@@ -4,24 +4,19 @@
 */
 
 /* 
-	for Korean Language Keyboard with Eclipse vrapper
-	if 'ESC' or ':' press, switch to English 
-*/
-;#IfWinActive, ahk_class SWT_Window0
-#If GetKeyState("capslock","T") = 0
-	~Esc::
-	~+SC027::
-		if(IME_CHECK("A"))
-			Send, {VK15}    ; input Korean/English switch key
-	return
-;#if
-#IfWinActive
-
-/* 
 	Korean/English switch
 */
 CapsLock & Space::Send, {VK15}
 CapsLock & t::WinSet, AlwaysOnTop, Toggle, A
+
+#If GetKeyState("capslock","T") = 0
+	~+SC027::
+		if(IME_CHECK("A"))
+			Send, {VK15}    ; input Korean/English switch key
+	return
+#if
+
+
 /*
 	IME check (MS Windows Korean character input mode check)
 */
