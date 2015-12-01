@@ -1,162 +1,162 @@
 /*
-	command functions : command_[a-z]+
-	@Author : johngrib82@gmail.com
-	@Created : 2015. NOV. 25
+  command functions : command_[a-z]+
+  @Author  : johngrib82@gmail.com
+  @Created : 2015. NOV. 25
 */
 
 /*
-	maximize active window
+  maximize active window
 */
 command_max(args) {
-	WinMaximize, A
+  WinMaximize, A
 }
 /*
-	minimize active window
+  minimize active window
 */
 command_min(args) {
-	WinMinimize, A
+  WinMinimize, A
 }
 
 /*
-	send ctrl + s
+  send ctrl + s
 */
 command_w(args) {
-	Send, ^s
+  Send, ^s
 }
 
 /*
-	adjust window invisibility 0 ~ 255
+  adjust window invisibility 0 ~ 255
 */
 command_trans(args){
-	if(args.HasKey(2))
-		option := args[2]
-	else
-		option := 35
+  if(args.HasKey(2))
+    option := args[2]
+  else
+    option := 35
 
-	WinSet, Transparent, %option% , A
+  WinSet, Transparent, %option% , A
 }
 
 /*
-	reset window inivisibility
+  reset window inivisibility
 */
 command_notrans(args){
-	WinSet, Transparent, OFF, A
+  WinSet, Transparent, OFF, A
 }
 
 /*
-	kill process (active window)
+  kill process (active window)
 */
 command_kill(args){
-	WinKill, A
+  WinKill, A
 }
 
 /*
-	get color at mouse pointer
+  get color at mouse pointer
 */
 command_color(args){
-	MouseGetPos, x, y
-	PixelGetColor, rgb, x, y, RGB
-	StringTrimLeft, rgb, rgb, 2
-	InputBox, color, color, , , 300, 110, , , , , %rgb%
-	Return	
+  MouseGetPos, x, y
+  PixelGetColor, rgb, x, y, RGB
+  StringTrimLeft, rgb, rgb, 2
+  InputBox, color, color, , , 300, 110, , , , , %rgb%
+  Return  
 }
 
 /*
-	shows list of memorized windows
+  shows list of memorized windows
 */
 command_mark(args){
-	msg := ""
-	loop 10
-	{
-		num := A_Index - 1
-		win_id := MARK[num]
-		WinGetTitle, title, ahk_id %win_id%
-		msg .= num . " : " . title . "`n"
-	}
-	MsgBox %msg%
+  msg := ""
+  loop 10
+  {
+    num := A_Index - 1
+    win_id := MARK[num]
+    WinGetTitle, title, ahk_id %win_id%
+    msg .= num . " : " . title . "`n"
+  }
+  MsgBox %msg%
 }
 
 /*
-	edit script
+  edit script
 */
 command_edit(args){
-	Edit
+  Edit
 }
 
 /*
-	show key log
+  show key log
 */
 command_log(args){
-	KeyHistory
+  KeyHistory
 }
 
 /*
-	show list of hot keys
+  show list of hot keys
 */
 command_hotkey(args){
-	ListHotkeys
+  ListHotkeys
 }
 
 /*
-	get title text of active window
+  get title text of active window
 */
 command_title(args){
-	WinGetActiveTitle, title
-	InputBox, title, TITLE, , , 300, 110, , , , , %title%
+  WinGetActiveTitle, title
+  InputBox, title, TITLE, , , 300, 110, , , , , %title%
 }
 
 /*
-	get time/date string
+  get time/date string
 */
 command_time(args){
 
-	if(args.HasKey(2) and args[2] = "help"){
-		Run, https://www.autohotkey.com/docs/commands/FormatTime.htm#Date_Formats_case_sensitive
-		return
-	}
+  if(args.HasKey(2) and args[2] = "help"){
+    Run, https://www.autohotkey.com/docs/commands/FormatTime.htm#Date_Formats_case_sensitive
+    return
+  }
 
-	format_str := { "": "", "date" :  "yyyy.MM.d", "now" : "hh:mm:ss"}
-	
-	if(args.HasKey(2) and format_str.HasKey(args[2]))
-		form := format_str[args[2]]
-	else
-		form := args[2]
-	
-	FormatTime, TimeString, ,%form%
-	InputBox, time, time, , , 300, 110, , , , , %TimeString%
+  format_str := { "": "", "date" :  "yyyy.MM.d", "now" : "hh:mm:ss"}
+  
+  if(args.HasKey(2) and format_str.HasKey(args[2]))
+    form := format_str[args[2]]
+  else
+    form := args[2]
+  
+  FormatTime, TimeString, ,%form%
+  InputBox, time, time, , , 300, 110, , , , , %TimeString%
 }
 
 /*
-	show variables list
+  show variables list
 */
 command_list(args){
-	ListVars
+  ListVars
 }
 
 /*
-	open everything
+  open everything
 */
 command_run(args){
-	txt := args[2]
-	run %txt%
+  txt := args[2]
+  run %txt%
 }
 
 /*
-	open keywords
-	Canonical Names of Control Panel Items
-	@link https://msdn.microsoft.com/en-us/library/ee330741%28VS.85%29.aspx
+  open keywords
+  Canonical Names of Control Panel Items
+  @link https://msdn.microsoft.com/en-us/library/ee330741%28VS.85%29.aspx
 */
 command_op(args){
 
-	sect := CFG.get_sect("OP_ADDRESS")
+  sect := CFG.get_sect("OP_ADDRESS")
 
-	if(sect.HasKey(args[2])){
-		value := sect[args[2]]
-		page := args[3]
-		sentence := Trim(value . " " . page)
-		Run, %sentence%
-	}
+  if(sect.HasKey(args[2])){
+    value := sect[args[2]]
+    page := args[3]
+    sentence := Trim(value . " " . page)
+    Run, %sentence%
+  }
 }
 command_open(args){
-	command_op(args)
+  command_op(args)
 }
