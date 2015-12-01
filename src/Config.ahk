@@ -30,10 +30,25 @@
 			}
 			this.cfg["FENCE"]       := this.func_get_tray_location()
 			this.cfg["STAT_LOC"]    := this.func_get_stat_location()
-			
-
-
+			this.cfg["OP_ADDRESS"]  := this.get_ini_section("OP_ADDRESS")
 		} ; // end of __New
+
+		get_ini_section(sect){
+			
+			map := {}
+			file := this.file_address
+			IniRead,se, %file%, %sect%
+			Loop,Parse,se,`n,`r	
+			{
+				line := Trim(A_LoopField)
+				if(RegExMatch(line, "^\s*\w+\s*\=\s*.+$")) {
+					key := RegExReplace(A_LoopField, "^\s*(\w+)\s*\=\s*.+$", "$1")
+					val := RegExReplace(A_LoopField, "^\s*\w+\s*\=\s*(.+)$", "$1")
+					map[key] := val
+				}
+			}
+			return map
+		}
 		
 		/*
 			get monitor count

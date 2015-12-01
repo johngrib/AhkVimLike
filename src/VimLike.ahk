@@ -128,6 +128,7 @@ return
 		input_sentence := Trim(input_sentence)
 
 		args := StrSplit(input_sentence, " ")
+		args[0] := input_sentence
 
 		if(args.Length() < 1){
 			return

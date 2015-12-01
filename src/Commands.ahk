@@ -109,6 +109,7 @@ command_title(args){
 	get time/date string
 */
 command_time(args){
+
 	if(args.HasKey(2) and args[2] = "help"){
 		Run, https://www.autohotkey.com/docs/commands/FormatTime.htm#Date_Formats_case_sensitive
 		return
@@ -133,13 +134,6 @@ command_list(args){
 }
 
 /*
-	open startup folder
-*/
-command_startup(args){
-	run, shell:Startup
-}
-
-/*
 	open everything
 */
 command_run(args){
@@ -148,12 +142,21 @@ command_run(args){
 }
 
 /*
-	open my computer
+	open keywords
+	Canonical Names of Control Panel Items
+	@link https://msdn.microsoft.com/en-us/library/ee330741%28VS.85%29.aspx
 */
-command_mycom(args){
-	Run ::{20d04fe0-3aea-1069-a2d8-08002b30309d}	
-}
+command_op(args){
 
-command_trash(args){
-	Run ::{645ff040-5081-101b-9f08-00aa002f954e} 
+	sect := CFG.get_sect("OP_ADDRESS")
+
+	if(sect.HasKey(args[2])){
+		value := sect[args[2]]
+		page := args[3]
+		sentence := Trim(value . " " . page)
+		Run, %sentence%
+	}
+}
+command_open(args){
+	command_op(args)
 }
