@@ -7,6 +7,37 @@
     this.file_address := file_address
     
     this.cfg := {}
+    this.set_stat_color()
+    this.set_multi_monitor_location()
+   
+    this.cfg["STAT_LOC"]    := this.func_get_stat_location()
+    this.cfg["OP_ADDRESS"]  := this.get_ini_section("OP_ADDRESS")
+    this.cfg["INPUT_COMMAND"] := this.get_input_command()   
+  } ; // end of __New
+
+  get_input_command(){
+
+    str := ""
+    file := this.file_address
+    IniRead,se, %file%, INPUT_COMMAND
+    Loop,Parse,se,`n,`r  
+    {
+      line := Trim(A_LoopField)
+      str := str . "," . line
+    }
+    
+    enum := this.cfg["OP_ADDRESS"]._NewEnum()
+    While enum[k, v]
+    {
+      temp := ",op " . k
+      str := str . temp
+    }
+    str := SubStr(str, 2)
+    Sort, str, CL D,
+    return StrSplit(str, ",", ".")    
+  }
+
+  set_stat_color(){
     this.cfg["NORMAL"]   := {"font_color" : "FF0000", "bg_color" : "000000", "_title": "avl_normal"  }
     this.cfg["INSERT"]   := {"font_color" : "3F51B5", "bg_color" : "FFFFFF", "_title": "avl_insert"  }
     this.cfg["CAPSLOCK"] := {"font_color" : "FF4081", "bg_color" : "FFFFFF", "_title": "avl_capslock"}
@@ -19,8 +50,10 @@
         }        
         this.cfg[sect][key] := ini_value
       }
-    }
+    }    
+  }
 
+  set_multi_monitor_location(){
     this.cfg["MONITOR_CNT"] := this.get_monitor_cnt()
     cnt := this.cfg["MONITOR_CNT"]
     loop %cnt% {
@@ -28,13 +61,10 @@
       name := "FENCE" . A_Index
       this.cfg[name] := {"loc" : "down", "size" : 0, "width" : monRight - monLeft, "height" : monBottom - monTop, "x" : monLeft, "y" : monTop }
     }
-    this.cfg["FENCE"]       := this.func_get_tray_location()
-    this.cfg["STAT_LOC"]    := this.func_get_stat_location()
-    this.cfg["OP_ADDRESS"]  := this.get_ini_section("OP_ADDRESS")
-  } ; // end of __New
+    this.cfg["FENCE"]       := this.func_get_tray_location()    
+  }
 
   get_ini_section(sect){
-    
     map := {}
     file := this.file_address
     IniRead,se, %file%, %sect%

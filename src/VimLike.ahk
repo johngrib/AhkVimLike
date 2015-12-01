@@ -57,6 +57,9 @@ return
     title := "input_command"
     contents := ""
     InputBox, input_sentence, %title%, %contents%, ,300, 110
+    AUTO_TEMP := ""
+    AUTO_CNT  := 1
+    
     input_sentence := Trim(input_sentence)
     
     args := StrSplit(input_sentence, " ")
@@ -65,7 +68,7 @@ return
     if(args.Length() < 1){
       return
     }
-    func_name := "command_" . args[1]
+    func_name := "command_" . args[1]   
     
     if( IsFunc( func_name ) ) {
       %func_name%(args)
@@ -73,7 +76,56 @@ return
     SetCapsLockState, On
     CMD.clear("auto")
   return
-#If
+#If 
+
+#IfWinActive input_command
+  $Tab::
+
+
+  ControlGetText, txt, Edit1, input_command
+
+  ;MsgBox %AUTO_TEMP%
+
+  if(AUTO_TEMP = ""){
+    AUTO_TEMP := Trim(txt)
+    AUTO_CNT  := 1
+    AUTO_ARR  := Object()
+    reg := "^" . AUTO_TEMP    
+    
+    arr := CFG.get_sect("INPUT_COMMAND")
+    cnt := 0
+    Loop % arr.MaxIndex()
+    {
+      th := arr[a_index]
+      if(RegExMatch(th, reg)){
+        cnt := cnt + 1
+        AUTO_ARR.Insert(th)
+      }
+    }
+    
+    if(cnt > 0){
+      result := AUTO_ARR[1]
+      ControlSetText, Edit1, %result%, input_command
+      return
+    }
+    /*
+    for i, v in AUTO_ARR
+    {
+      MsgBox % i . " : " . v
+    }
+    */
+  } else if( A_PriorKey = "Tab" ) {
+    
+  } else if( A_PriorKey <> "Tab" ) {
+    
+  }
+
+    ;MsgBox % AUTO_TEMP
+    /*
+    ControlSetText, Edit1, test_msg, input_command
+   */
+  return
+#IfWinActive
 
 /*
   number commands : numbers works like VIM

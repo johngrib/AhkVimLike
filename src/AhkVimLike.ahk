@@ -28,13 +28,16 @@ global CMD
 global STAT
 global CFG
 global KEYS
-global USER_HOME
+global A_UserHome
+global AUTO_TEMP
+global AUTO_CNT
+global AUTO_ARR
 
 main(){
   Static init := main()
 
-  USER_HOME := A_Desktop . "\..\.."
-  
+  A_UserHome := A_Desktop . "\..\.."
+
   CFG := new Config(".\ahkvimlike.ini")
 
   MARK := {}
@@ -44,7 +47,13 @@ main(){
   STAT["CAPSLOCK"] := CFG.get_sect("CAPSLOCK")
 
   KEYS := func_get_key_maps()
+  CMD  := new CmdOBJ("", "")
+  AUTO_TEMP := ""
+  AUTO_CNT  := 1
+  AUTO_ARR  := Object()
 
-  CMD := new CmdOBJ("", "")
+  ; capslock state initialize
+  caps := CFG.get_ini_value("INIT", "capslock", "off")  
+  SetCapsLockState, %caps%
   CMD.changeMode("auto")
 }
