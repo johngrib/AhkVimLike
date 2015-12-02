@@ -78,13 +78,12 @@ return
   return
 #If 
 
+/*
+  tab to auto complete in inputbox (input_command)
+*/
 #IfWinActive input_command
   $Tab::
-
-
   ControlGetText, txt, Edit1, input_command
-
-  ;MsgBox %AUTO_TEMP%
 
   if(AUTO_TEMP = ""){
     AUTO_TEMP := Trim(txt)
@@ -104,26 +103,25 @@ return
     }
     
     if(cnt > 0){
-      result := AUTO_ARR[1]
+      result := AUTO_ARR[AUTO_CNT]
       ControlSetText, Edit1, %result%, input_command
+      AUTO_CNT := AUTO_CNT + 1
       return
     }
-    /*
-    for i, v in AUTO_ARR
-    {
-      MsgBox % i . " : " . v
-    }
-    */
   } else if( A_PriorKey = "Tab" ) {
+    reg := "^" . AUTO_TEMP
     
+    if(AUTO_ARR.MaxIndex() < AUTO_CNT){
+      AUTO_CNT := 1
+    }
+    result := AUTO_ARR[AUTO_CNT]
+    ControlSetText, Edit1, %result%, input_command
+    AUTO_CNT := AUTO_CNT + 1
+    return
   } else if( A_PriorKey <> "Tab" ) {
-    
+    AUTO_TEMP := ""
+    return
   }
-
-    ;MsgBox % AUTO_TEMP
-    /*
-    ControlSetText, Edit1, test_msg, input_command
-   */
   return
 #IfWinActive
 
