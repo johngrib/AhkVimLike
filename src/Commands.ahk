@@ -160,3 +160,8 @@ command_op(args){
 command_open(args){
   command_op(args)
 }
+
+command_reg(args){
+  rs := CLIP.get_list()
+  MsgBox % rs
+}

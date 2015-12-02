@@ -13,6 +13,7 @@
 #Include Functions.ahk  ; Mouse control functions
 #include Commands.ahk   ; Command functions
 #include CmdOBJ.ahk
+#include ClipOBJ.ahk
 
 SendMode Input
 SetDefaultMouseSpeed, 0
@@ -32,6 +33,7 @@ global A_UserHome
 global AUTO_TEMP
 global AUTO_CNT
 global AUTO_ARR
+global CLIP
 
 main(){
   Static init := main()
@@ -39,6 +41,7 @@ main(){
   A_UserHome := A_Desktop . "\..\.."
 
   CFG := new Config(".\ahkvimlike.ini")
+  CLIP := new ClipOBJ()
 
   MARK := {}
   STAT := {}

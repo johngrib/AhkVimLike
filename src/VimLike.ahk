@@ -83,7 +83,7 @@ return
     SetCapsLockState, On
     CMD.clear("auto")
   return
-#If 
+#If
 
 /*
   tab to auto complete in inputbox (input_command)
@@ -192,6 +192,10 @@ $x::
 $+x::
 $c::
 $m::
+$u::
+$+u::
+$y::
+$p::
 $SC028::  ;  '
   ; get hot_key
   hot_key := A_ThisHotkey
@@ -258,3 +262,5 @@ $+VKBF::Run, ".\manual.html"
     *k:: func_hjkl_move("Up", CMD.get_num())
     *l:: func_hjkl_move("Right", CMD.get_num())
 #If
+
+; TODO : clipboard reg history

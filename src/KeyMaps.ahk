@@ -17,6 +17,70 @@ key_x(ByRef input_number){
 }
 
 /*
+  u : undo
+*/
+key_u(ByRef input_number){
+  if(input_number <> "")
+    Send, ^{z %input_number%}
+}
+
+/*
+  to upper case , to lower case
+*/
+key_gu(ByRef input_number){
+  
+  old := ClipboardAll
+  Clipboard := ""
+  Send, ^c
+
+  ClipWait 0.5
+  if (ErrorLevel){
+    Clipboard := old
+    return
+  }
+
+  if( GetKeyState("Shift") ){
+    StringUpper, Clipboard, Clipboard    
+  } else {
+    StringLower, Clipboard, Clipboard
+  }
+  
+  Send, ^v
+  Clipboard := old
+  return
+}
+
+/*
+  copy
+*/
+key_y(ByRef input_number){
+  temp := Clipboard
+  Send, ^{c}
+  Sleep 500
+  
+  if(input_number = ""){
+    CLIP.num_unshift(Clipboard)
+  } else {
+    CLIP.set_value(input_number, Clipboard)
+  }
+  Clipboard := temp
+}
+
+~^c::
+  Sleep 500
+  new_value := Clipboard
+  CLIP.num_unshift(new_value)
+return
+
+
+/*
+  paste
+*/
+key_p(ByRef input_number){
+  Send, ^{v %input_number%}
+}
+
+/*
   0 : Home
 */
 key_0(ByRef input_number) {
