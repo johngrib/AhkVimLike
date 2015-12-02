@@ -47,7 +47,7 @@ return
   colon to input command mode
 */
 #If GetKeyState("capslock","T")
-  $+SC027::  ;  : (colon) command
+  $+SC027::
     
     SetCapsLockState, Off
     CMD.changeMode("auto")
@@ -56,7 +56,14 @@ return
     
     title := "input_command"
     contents := ""
+    
     InputBox, input_sentence, %title%, %contents%, ,300, 110
+    
+    ; if canceled, do nothing
+    If ErrorLevel {
+      return
+    } 
+    
     AUTO_TEMP := ""
     AUTO_CNT  := 1
     
