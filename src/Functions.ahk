@@ -9,13 +9,19 @@ func_get_key_maps(){
   command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
 
   ; normal commands
-  command_keymap.InsertAt(1, "$*i", "$*o",  "$z", "$x", "$+x", "$c", "$*g","$*t","$*r","$*b","$*f","$*q","$*e","$w","$a","$s","$d", "$m", "$p", "$u", "$+u", "$y")
+  command_keymap.InsertAt(1, "$*a", "$*b", "$*c", "$*d", "$*e", "$*f", "$*g")
+
+  command_keymap.InsertAt(1, "$*i", "$*o",  "$z", "$x", "$+x","$*t","$*r","$*q","$w","$s","$m", "$p", "$u", "$+u", "$y")
+
+  ;command_keymap.InsertAt(1, "$^b", "$^e")
+  
+  ;command_keymap.InsertAt(1, "$+e")
 
   ; mouse accelator   [  ]  \
   command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
 
   ; colon (+semi-colon) , single quote ( ' )
-  command_keymap.InsertAt(1, "$+VKBF", "$SC028")
+  command_keymap.InsertAt(1, "$+VKBF", "$SC028", "$+SC028")
 
   return command_keymap
 }

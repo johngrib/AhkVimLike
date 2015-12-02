@@ -3,6 +3,12 @@
   @Author : johngrib82@gmail.com
   @Created : 2015. NOV. 26
 */
+key_i(ByRef input_number){
+  func_i_o()
+}
+key_o(ByRef input_number){
+  func_i_o()
+}
 
 /*
   x, +x : delete, backspace
@@ -80,6 +86,20 @@ key_p(ByRef input_number){
   Send, ^{v %input_number%}
 }
 
+paste_from_clipboard_register(key){
+  temp := Clipboard
+  Clipboard := CLIP.get_value(key)
+  Send, ^{v}
+}
+
+copy_to_clipboard_register(key){
+  temp := Clipboard
+  Send, ^{c}
+  Sleep 500
+  CLIP.set_value(key, Clipboard)
+  Clipboard := temp
+}
+
 /*
   0 : Home
 */
@@ -113,11 +133,17 @@ key_f(ByRef input_number) {
 }
 
 /*
+  b  : previous word (^left)
+  +b : next word (^right)
   ^b : Page Up
 */
 key_b(ByRef input_number) {
   if( GetKeyState("Control") )
     Send, {PGUP %input_number%}
+  else if( GetKeyState("Shift") )
+    Send, ^{Right %input_number%}
+  else
+    Send, ^{Left %input_number%}
 }
 
 /*

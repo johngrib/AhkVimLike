@@ -52,7 +52,7 @@ return
     SetCapsLockState, Off
     CMD.changeMode("auto")
     
-    Gui +LastFound +OwnDialogs +AlwaysOnTop
+    ;Gui +LastFound +OwnDialogs +AlwaysOnTop
     
     title := "input_command"
     contents := ""
@@ -147,6 +147,12 @@ $8::
 $9::
   StringTrimLeft, num, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
 
+  if(RegExMatch(CMD.get_cmd(), "^\""\d{0,1}$")){
+    CMD.append_cmd(num)
+    show_mode(CMD.get_num_cmd())
+    return
+  }
+
   clear_str := { "m": "func_win_memorize", "'" :  "func_win_mem_activate" }
   if(clear_str.HasKey(CMD.get_cmd())) {
     function := clear_str[CMD.get_cmd()]
@@ -162,52 +168,74 @@ $9::
     CMD.clear("num")
     return
   }
-    show_mode(CMD.get_num())
+  show_mode(CMD.get_num())
 return
 
 ; shift + 4 : END key
 $+4:: key_4(CMD.get_num())
 
-$*i::
-$*o::
-  func_i_o()
-return
-
 /* 
   commands (joinable with number)
 */
+$*a::
+$*b::
+$*c::
+$*d::
+$*e::
+$*f::
 $*g::
+$*i::
+$*o::
+;$^b::
+;$^e::
+;$+e::
 $*t::
 $*r::
-$*b::
-$*f::
 $*q::
-$*e::
+;$*e::
 $w::
-$a::
 $s::
-$d::
 $z::
 $x::
 $+x::
-$c::
 $m::
 $u::
 $+u::
 $y::
 $p::
 $SC028::  ;  '
+$+SC028::  ;  '
   ; get hot_key
   hot_key := A_ThisHotkey
   
   if(A_ThisHotkey = "$SC028"){
     hot_key := "'"
+  } else if(A_ThisHotkey = "$+SC028"){
+    hot_key := """"
   } else if(RegExMatch(A_ThisHotkey, "^\W")){
     StringTrimLeft, hot_key, A_ThisHotkey, StrLen(A_ThisHotkey) - 1
   }
   
   ; join previous command with current command
   CMD.append_cmd(hot_key)
+  
+  ; if clipboard function
+  if(RegExMatch(CMD.get_cmd(), "^\""[a-z]$")){
+    show_mode(CMD.get_cmd())
+    return
+  } else if(RegExMatch(CMD.get_cmd(), "^\""(?:\+|\d+|[a-z])[yp]$")){
+    register := RegExReplace(CMD.get_cmd(), "^\""(\+|\d+|[a-z])([yp])$", "$1,$2")
+    rs := StrSplit(register, ",", ".")
+    
+    if(rs[2] = "p"){
+      paste_from_clipboard_register(rs[1])
+    } else {
+      copy_to_clipboard_register(rs[1])
+    }
+    CMD.clear("auto")
+    return
+  }
+
   func_name := "key_" . CMD.get_cmd()
   clear_command := 0
 
