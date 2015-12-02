@@ -61,6 +61,8 @@ return
     
     ; if canceled, do nothing
     If ErrorLevel {
+      SetCapsLockState, On
+      CMD.clear("auto")
       return
     } 
     
@@ -75,6 +77,7 @@ return
     if(args.Length() < 1){
       return
     }
+    
     func_name := "command_" . args[1]   
     
     if( IsFunc( func_name ) ) {
@@ -305,5 +308,9 @@ $+VKBF::Run, ".\manual.html"
     *k:: func_hjkl_move("Up", CMD.get_num())
     *l:: func_hjkl_move("Right", CMD.get_num())
 #If
-
+func_hjkl_move(key, ByRef cnt){
+  Send {%key% %cnt%}
+  CMD.set_num("")
+  CMD.changeMode("auto")
+}
 ; TODO : clipboard reg history

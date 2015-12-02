@@ -26,12 +26,6 @@ func_get_key_maps(){
   return command_keymap
 }
 
-func_hjkl_move(key, ByRef cnt){
-  Send {%key% %cnt%}
-  CMD.set_num("")
-  CMD.changeMode("auto")
-}
-
 /*
   mouse move
 */
@@ -62,7 +56,7 @@ return
 }
 
 /*
-  mode change by i, o
+  mode change by i, o, a
 */
 func_i_o_a(key) {
   SetCapsLockState, Off
@@ -164,4 +158,21 @@ move_window(mon, var, title){
     }
 
   WinMove, % title, , xx, yy, ww, hh
+}
+
+/*
+  paste using clipboard register
+  copy using clipboard register
+*/
+paste_from_clipboard_register(key){
+  temp := Clipboard
+  Clipboard := CLIP.get_value(key)
+  Send, ^{v}
+}
+copy_to_clipboard_register(key){
+  temp := Clipboard
+  Send, ^{c}
+  Sleep 500
+  CLIP.set_value(key, Clipboard)
+  Clipboard := temp
 }

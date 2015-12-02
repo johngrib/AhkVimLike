@@ -16,6 +16,14 @@ CapsLock & t::WinSet, AlwaysOnTop, Toggle, A
   return
 #if
 
+/*
+  ^c -> push to clipboard register
+*/
+~^c::
+  Sleep 500
+  new_value := Clipboard
+  CLIP.num_unshift(new_value)
+return
 
 /*
   IME check (MS Windows Korean character input mode check)
