@@ -4,10 +4,13 @@
   @Created : 2015. NOV. 26
 */
 key_i(ByRef input_number){
-  func_i_o()
+  func_i_o_a("i")
 }
 key_o(ByRef input_number){
-  func_i_o()
+  func_i_o_a("o")
+}
+
+key_n(ByRef input_number){
 }
 
 /*
@@ -28,6 +31,9 @@ key_x(ByRef input_number){
 key_u(ByRef input_number){
   if(input_number <> "")
     Send, ^{z %input_number%}
+}
+
+key_v(ByRef input_number){
 }
 
 /*
@@ -77,7 +83,6 @@ key_y(ByRef input_number){
   new_value := Clipboard
   CLIP.num_unshift(new_value)
 return
-
 
 /*
   paste
@@ -156,8 +161,6 @@ key_q(ByRef input_number) {
     Click Down Left
   else if( GetKeyState("Shift"))
     Click Up Left
-  else if( GetKeyState("Space", "p"))
-    MouseMove, 5, 5
   else
     Click, Left, %input_number%
 }
@@ -184,12 +187,15 @@ key_e(ByRef input_number) {
   d : right
 */
 key_w(ByRef input_number) {
-  if(input_number = "")
+  if(input_number = "") {
     input_number = 1
-  func_mouse_move( input_number , 1, 1, 1 )
+    func_mouse_move( input_number , 1, 1, 1 )
+  }
 }
 key_a(ByRef input_number) {
-  if(input_number = "")
+  if( GetKeyState("Shift") ) {
+    func_i_o_a("a")
+  } else if(input_number = "")
     input_number = 1
   func_mouse_move( 1, input_number, 1, 1 )
 }

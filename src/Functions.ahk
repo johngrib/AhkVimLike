@@ -8,14 +8,14 @@ func_get_key_maps(){
   ; numbers
   command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
 
-  ; normal commands
-  command_keymap.InsertAt(1, "$*a", "$*b", "$*c", "$*d", "$*e", "$*f", "$*g")
-
-  command_keymap.InsertAt(1, "$*i", "$*o",  "$z", "$x", "$+x","$*t","$*r","$*q","$w","$s","$m", "$p", "$u", "$+u", "$y")
-
-  ;command_keymap.InsertAt(1, "$^b", "$^e")
+  ; normal keys
+  command_keymap.InsertAt(1, "$a", "$b", "$c", "$d", "$e", "$f", "$g", "$i", "$m", "$n", "$o", "$p", "$q", "$r", "$s", "$t", "$u", "$v", "$w", "$x", "$y", "$z")
   
-  ;command_keymap.InsertAt(1, "$+e")
+  ; shift 
+  command_keymap.InsertAt(1, "$+a", "$+b", "$+e", "$+i", "$+o", "$+q", "$+u", "$+x")
+  
+  ; control
+  command_keymap.InsertAt(1,  "$^b", "$^e", "$^f", "$^q")
 
   ; mouse accelator   [  ]  \
   command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
@@ -64,18 +64,21 @@ return
 /*
   mode change by i, o
 */
-func_i_o() {
+func_i_o_a(key) {
   SetCapsLockState, Off
   GetKeyState, isShiftDown, Shift, P
   CMD.changeMode("auto")
   
-  if(GetKeyState("i", "P")){
+  if(key = "i"){
     if("D" == isShiftDown) 
       Send, {Home}
-  } else if(GetKeyState("o", "P")){
+  } else if(key = "o"){
     if("D" == isShiftDown) 
       Send, {Up}
     Send, {End}{Enter}
+  } else if(key = "a"){
+    if("D" == isShiftDown) 
+      Send, {End}
   }
 }
 
