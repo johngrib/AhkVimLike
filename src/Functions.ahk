@@ -108,23 +108,25 @@ show_mode(msg){
   
   bg_color := CFG.get_value(mode, "bg_color")
   font_color := CFG.get_value(mode, "font_color")
-    xx := CFG.get_value("STAT_LOC", "x")
-    yy := CFG.get_value("STAT_LOC", "y")
+  trans := CFG.get_sect(mode)["trans"]
+  
+  xx := CFG.get_value("STAT_LOC", "x")
+  yy := CFG.get_value("STAT_LOC", "y")
 
-  create_gui("PANEL", set["_title"], msg, xx, yy, bg_color, font_color)
+  create_gui("PANEL", set["_title"], msg, xx, yy, bg_color, font_color, trans)
 }
 
 /*
   shows gui
 */
-create_gui(id, title, msg, x, y, bg_color, font_color){
+create_gui(id, title, msg, x, y, bg_color, font_color, trans){
     Gui, %id%:Destroy
-        Gui, %id%:+AlwaysOnTop +ToolWindow -Caption
+    Gui, %id%:+AlwaysOnTop +ToolWindow -Caption
     Gui, %id%:Color, %bg_color%
-        Gui, %id%:Font, s9 bold, Verdana
-        Gui, %id%:Add, Text, c%font_color%, -- %msg% --
-        Gui, %id%:Show,NoActivate x%x% y%y%, %title%
-    WinSet, Transparent, 220 , %title%
+    Gui, %id%:Font, s9 bold, Verdana
+    Gui, %id%:Add, Text, c%font_color%, -- %msg% --
+    Gui, %id%:Show,NoActivate x%x% y%y%, %title%
+    WinSet, Transparent, %trans%, %title%
 }
 
 /*

@@ -38,9 +38,9 @@
   }
 
   set_stat_color(){
-    this.cfg["NORMAL"]   := {"font_color" : "FF0000", "bg_color" : "000000", "_title": "avl_normal"  }
-    this.cfg["INSERT"]   := {"font_color" : "3F51B5", "bg_color" : "FFFFFF", "_title": "avl_insert"  }
-    this.cfg["CAPSLOCK"] := {"font_color" : "FF4081", "bg_color" : "FFFFFF", "_title": "avl_capslock"}
+    this.cfg["NORMAL"]   := {"font_color" : "FF0000", "bg_color" : "000000", "_title": "avl_normal", "trans": "220" }
+    this.cfg["INSERT"]   := {"font_color" : "3F51B5", "bg_color" : "FFFFFF", "_title": "avl_insert", "trans": "220"  }
+    this.cfg["CAPSLOCK"] := {"font_color" : "FF4081", "bg_color" : "FFFFFF", "_title": "avl_capslock", "trans": "220" }
 
     for sect, obj in this.cfg {
       for key, def in obj {
@@ -164,7 +164,7 @@
       return {"loc" : "up", "size" : hh, "width" : A_ScreenWidth, "height" : A_ScreenHeight - hh, "x" : 0, "y" : hh  }
   }
   get_stat_height(){
-    create_gui("PANEL", "size_test", "NORMAL", -100, -100, "000000", "FFFFFF")
+    create_gui("PANEL", "size_test", "NORMAL", -100, -100, "000000", "FFFFFF", "220")
     WinGetPos,xx,yy,ww, hh, size_test
     return hh
   }

@@ -127,6 +127,7 @@ return
     result := AUTO_ARR[AUTO_CNT]
     ControlSetText, Edit1, %result%, input_command
     AUTO_CNT := AUTO_CNT + 1
+    Send, {End}
     return
   } else if( A_PriorKey <> "Tab" ) {
     AUTO_TEMP := ""

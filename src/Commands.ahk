@@ -161,7 +161,32 @@ command_open(args){
   command_op(args)
 }
 
+/*
+  show clipboard register
+*/
 command_reg(args){
   rs := CLIP.get_list()
   MsgBox % rs
+}
+
+/*
+  adjust invisivility of status bar
+*/
+command_stattrans(args){
+  
+  if(not RegExMatch(args[2], "^\d{1,3}$"))
+    return
+  
+  if(args[2] < 0)
+    args[2] := 0
+  else if(args[2] > 255)
+    args[2] := 255
+  
+  CFG.get_sect("NORMAL")["trans"] := args[2]
+  CFG.get_sect("INSERT")["trans"] := args[2]
+  CFG.get_sect("CAPSLOCK")["trans"] := args[2]
+  
+  CFG.fix_ini_value("NORMAL", "trans", args[2] )
+  CFG.fix_ini_value("INSERT", "trans", args[2] )
+  CFG.fix_ini_value("CAPSLOCK", "trans", args[2] )
 }
