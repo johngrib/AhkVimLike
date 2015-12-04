@@ -30,7 +30,7 @@ return
 */
 #If GetKeyState("capslock","T") = 0
   $Esc::
-      if (A_PriorHotKey = "$Esc" and A_TimeSincePriorHotKey < 500) {
+    if (A_PriorHotKey = "$Esc" and A_TimeSincePriorHotKey < 500) {
       SetCapsLockState, On
       CMD.changeMode("auto")  
     } else {
@@ -99,7 +99,7 @@ return
     AUTO_TEMP := Trim(txt)
     AUTO_CNT  := 1
     AUTO_ARR  := Object()
-    reg := "^" . AUTO_TEMP    
+    reg := "^" . AUTO_TEMP
     
     arr := CFG.get_sect("INPUT_COMMAND")
     cnt := 0
@@ -136,7 +136,7 @@ return
 #IfWinActive
 
 /*
-  number commands : numbers works like VIM
+  number commands : numbers work like VIM
 */
 $0::
 $1::
@@ -285,9 +285,18 @@ $SC01B::return  ;  ]
 $SC02B::return  ;  \
 
 /*
+  search
+*/
+$SC035::
+  Send, ^{f}
+  SetCapsLockState, Off
+  CMD.changeMode("auto")
+return
+
+/*
   help
 */
-$+VKBF::Run, ".\manual.html"
+$+SC035::Run, ".\manual.html"
   
 /*
   h j k l moves
@@ -313,4 +322,3 @@ func_hjkl_move(key, ByRef cnt){
   CMD.set_num("")
   CMD.changeMode("auto")
 }
-; TODO : clipboard reg history

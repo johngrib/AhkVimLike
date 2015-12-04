@@ -20,8 +20,8 @@ func_get_key_maps(){
   ; mouse accelator   [  ]  \
   command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
 
-  ; colon (+semi-colon) , single quote ( ' )
-  command_keymap.InsertAt(1, "$+VKBF", "$SC028", "$+SC028")
+  ; ?, /, colon (+semi-colon) , single quote ( ' )
+  command_keymap.InsertAt(1, "$+SC035", "$SC035", "$SC028", "$+SC028")
 
   return command_keymap
 }
@@ -168,6 +168,7 @@ paste_from_clipboard_register(key){
   temp := Clipboard
   Clipboard := CLIP.get_value(key)
   Send, ^{v}
+  Clipboard := temp
 }
 copy_to_clipboard_register(key){
   temp := Clipboard
