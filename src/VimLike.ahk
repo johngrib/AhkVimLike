@@ -280,10 +280,11 @@ return
   n + w a s d
   m + w a s d
   , + w a s d
-*/
 $SC01A::return  ;  [
 $SC01B::return  ;  ]
 $SC02B::return  ;  \
+*/
+$SC033::return  ;  ,
 
 /*
   search

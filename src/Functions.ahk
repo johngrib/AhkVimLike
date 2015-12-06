@@ -18,7 +18,7 @@ func_get_key_maps(){
   command_keymap.InsertAt(1,  "$^b", "$^e", "$^f", "$^q")
 
   ; mouse accelator   [  ]  \
-  command_keymap.InsertAt(1, "$SC01A", "$SC01B",  "$SC02B")
+  command_keymap.InsertAt(1, "$SC033")
 
   ; ?, /, colon (+semi-colon) , single quote ( ' )
   command_keymap.InsertAt(1, "$+SC035", "$SC035", "$SC028", "$+SC028")
