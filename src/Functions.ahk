@@ -37,12 +37,14 @@ func_mouse_move( ww, aa, ss, dd ) {
   ; , + wasd : 1 pixcel distance
 
   mul = 70
-  ;if(1 == GetKeyState("n", "P")){
-  if(GetKeyState("SC01A", "P")){    ;  [
+  if(1 == GetKeyState("n", "P"),){
+  ;if(GetKeyState("SC01A", "P")){    ;  [
     mul = 400
-  } else if (GetKeyState("SC01B", "P")){   ;   ]
+  ;} else if (GetKeyState("SC01B", "P")){   ;   ]
+  } else if (GetKeyState("m", "P")){   ;   ]
     mul = 10
-  } else if (GetKeyState("SC02B", "P")){  ;  \
+  ;} else if (GetKeyState("SC02B", "P")){  ;  \
+  } else if (GetKeyState("SC033", "P")){  ;  \
     mul = 1
   }
 
