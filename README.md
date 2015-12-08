@@ -32,6 +32,22 @@ INSERT 모드에서 shift + Capslock 을 누르면 CAPSLOCK 모드가 됩니다.
 
 ### NORMAL
 
+NORMAL 모드에서는 예약된 키 스트로크를 입력하는 것으로 특정 기능을 호출할 수 있습니다.</br>
+가령 여러 개의 탭이 있는 응용 프로그램에서 AhkVimLike 를 실행하고 gt 를 입력한다면, 
+^TAB 입력을 보내게 되어 다음 탭으로 이동하는 효과를 기대할 수 있습니다.
+
+예약된 키 스트로크는 모두 KeyMaps.ahk 에 key_keystrokes(input_number) { } 의 형태로 정의되어 있습니다.
+즉, 새로운 키 스트로크로 gb 를 추가하고 싶다면 KeyMaps.ahk 파일에 다음과 같은 함수를 추가해주면 됩니다.
+
+````autohotkey
+key_gb(input_number) {
+  ; do something
+}
+````
+
+위와 같이 새로운 함수를 추가했다면, NORMAL 모드에서 gb 를 입력하여 호출할 수 있습니다.</br>
+물론 두 개의 키 스트로크 뿐 아니라 하나나 셋 이상의 키 스트로크도 추가할 수 있습니다.
+
 #### keyboard control
 * __hjkl__ : LEFT, DOWN, UP, RIGHT 입니다. 숫자 키와 조합하여 사용하는 것도 가능합니다. 
 즉, 30J 를 입력하면 DOWN 키를 30 번 입력한 것과 같은 효과를 냅니다.
