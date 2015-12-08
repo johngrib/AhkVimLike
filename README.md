@@ -155,5 +155,16 @@ zq : primary 모니터의 왼쪽 위로 이동. (일반적으로 1zq 와 같음)
 #### COMMAND
 
 NORMAL 모드에서 : 를 입력하면 명령어를 입력하는 작은 창이 하나 나타납니다.</br>
-이 창에 다음의 명령어를 입력하여 예약된 기능을 사용할 수 있습니다.</br>
-예약된 기능들은 모두 Commands.ahk 파일에 command_functionName(args) { } 형태로 정의돼 있으며, functionName 을 입력하고 스페이스로 args 를 입력하면 사용할 수 있도록 되어 있습니다.
+이 창에 명령어를 입력하여 예약된 기능을 사용할 수 있습니다.</br>
+예약된 기능들은 모두 Commands.ahk 파일에 command_functionName(args) { } 형태로 정의돼 있고,
+functionName 을 입력하고 args 를 입력하면 사용할 수 있도록 되어 있습니다.
+
+즉, 새로운 명령어를 추가하고 싶다면 Commands.ahk 파일에 다음과 같은 함수를 추가해주면 됩니다.
+
+````autohotkey
+command_newfunction(args) {
+  ; do something
+}
+````
+
+위와 같이 새로운 함수를 추가했다면, NORMAL 모드에서 :newfunction 으로 호출할 수 있습니다.
