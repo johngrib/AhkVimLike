@@ -237,4 +237,17 @@ input 명령어를 입력하는 창에서 TAB 키를 입력하면 자동 완성 
 
 ##### OP 명령에 대하여
 
-op, open 명령은 해당 웹 주소나 폴더를 open 하는 명령으로, 
+op, open 명령은 해당 웹 주소나 폴더를 open 하는 명령입니다.</br>
+autohotkey 의 run 명령어를 사용하므로, 웹 브라우저나 폴더를 열 수도 있으며 bat 파일이나 exe 파일을 실행할 수도 있습니다.
+
+op 명령어로 open 할 수 있는 경로를 추가하려면
+ahkvimlike.ini 파일의 `[OP_ADDRESS]` 섹션에 alias 와 address 값을 정의해 주면 됩니다.
+
+````ini
+gh = http://github.com
+````
+
+위와 같이 ini 파일에 github 주소를 추가하였다면, 
+:op gh 를 입력하였을 때 웹 브라우저로 http://github.com 페이지가 열리게 됩니다.
+
+op 명령어는 ini 파일의 [INPUT_COMMAND] 섹션에 추가해주지 않아도 TAB 자동완성 기능을 사용할 수 있습니다.
