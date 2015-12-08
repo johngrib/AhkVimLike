@@ -211,5 +211,5 @@ command_newfunction(args) {
 * __:time__ : 날짜/시간 문자열을 리턴한다.</br>
 :time (현재 날짜/시간 문자열)</br>
 :time date (오늘 날짜 문자열)</br>
-:time [format] (지금 시간을 입력한 포맷 문자열로 리턴한다.)</br>
+:time `[format`] (지금 시간을 입력한 포맷 문자열로 리턴한다.)</br>
 :time help (날짜/시간 포맷 도움말 보기)
