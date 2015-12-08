@@ -185,6 +185,13 @@ command_newfunction(args) {
 
 위와 같이 새로운 함수를 추가했다면, NORMAL 모드에서 :newfunction 으로 호출할 수 있습니다.
 
+````text
+input 명령어를 입력하는 창에서 TAB 키를 입력하면 자동 완성 기능을 사용할 수 있습니다.
+자동 완성 기능은 ini 파일의 [INPUT_COMMAND] 섹션을 참고하므로,
+새로운 함수를 추가하면 [INPUT_COMMAND] 섹션에도 해당 명령어를 추가해 주어야
+자동 완성 기능을 사용할 수 있습니다.
+````
+
 * __:color__ : 마우스 포인터가 있는 곳의 RGB 컬러 값을 조사하여 출력한다.
 
 * __:edit__ : ahk 스크립트를 편집한다.
@@ -199,13 +206,6 @@ command_newfunction(args) {
 
 * __:min__ : 현재 활성화된 윈도우를 최소화한다.
 
-* __:op__ : ahkvimlike.ini 파일의 OP_ADDRESS 에 정의된 주소 명령을 실행한다.</br>
-:op doc (내 문서 폴더를 연다)</br>
-:op inetcpl (인터넷 옵션을 연다)</br>
-:op c (c 드라이브 탐색기를 연다)</br>
-:op google (기본 웹 브라우저로 google.com 에 접속한다)
-(그 외 다수. 자세한 목록은 ini 파일을 참조할 것.)
-
 * __:reg__ : 클립보드 레지스터 목록을 본다.
 
 * __:time__ : 날짜/시간 문자열을 리턴한다.</br>
@@ -213,3 +213,28 @@ command_newfunction(args) {
 :time date (오늘 날짜 문자열)</br>
 :time `[format]` (지금 시간을 입력한 포맷 문자열로 리턴한다.)</br>
 :time help (날짜/시간 포맷 도움말 보기)
+
+* __:title__ : 현재 활성화된 윈도우의 타이틀 문자열을 리턴한다.
+
+* __:trans__ : 현재 활성화된 윈도우의 투명도를 설정한다 (0~255)</br>
+:trans 0 (완전 투명. 안 보임)</br>
+:trans 255 (불투명. Windows 기본값)
+
+* __:notrans__ : 현재 활성화된 윈도우의 투명도를 255 로 복구한다.
+
+* __:w__ : control + s 를 입력한다.
+
+* __:stattrans__ : 모드 표시 바의 투명도를 변경한다 (0 ~ 255)
+
+* __:open__ : op 명령과 같다.
+
+* __:op__ : ahkvimlike.ini 파일의 OP_ADDRESS 에 정의된 주소 명령을 실행한다.</br>
+:op doc (내 문서 폴더를 연다)</br>
+:op inetcpl (인터넷 옵션을 연다)</br>
+:op c (c 드라이브 탐색기를 연다)</br>
+:op google (기본 웹 브라우저로 google.com 에 접속한다)
+(그 외 다수. 자세한 목록은 ini 파일을 참조할 것.)
+
+##### OP 명령에 대하여
+
+op, open 명령은 해당 웹 주소나 폴더를 open 하는 명령으로, 
