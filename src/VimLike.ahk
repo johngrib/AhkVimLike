@@ -215,6 +215,7 @@ $+i::
 $+o::
 $+q::
 $+u::
+$+v::
 $+x::
 ;--------------
 $^b::
@@ -299,7 +300,7 @@ return
   help
 */
 $+SC035::Run, ".\manual.html"
-  
+
 /*
   h j k l moves
   h : left

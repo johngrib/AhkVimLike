@@ -12,7 +12,7 @@ func_get_key_maps(){
   command_keymap.InsertAt(1, "$a", "$b", "$c", "$d", "$e", "$f", "$g", "$i", "$m", "$n", "$o", "$p", "$q", "$r", "$s", "$t", "$u", "$v", "$w", "$x", "$y", "$z")
   
   ; shift 
-  command_keymap.InsertAt(1, "$+a", "$+b", "$+e", "$+i", "$+o", "$+q", "$+u", "$+x")
+  command_keymap.InsertAt(1, "$+a", "$+b", "$+e", "$+i", "$+o", "$+q", "$+u", "$+v", "$+x")
   
   ; control
   command_keymap.InsertAt(1,  "$^b", "$^e", "$^f", "$^q")

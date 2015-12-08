@@ -293,6 +293,11 @@ key_n(ByRef input_number){
 key_t(ByRef input_number){
 }
 key_v(ByRef input_number){
+  if(GetKeyState("Shift")){
+    Send, {ShiftUp}
+  } else {
+    Send, {ShiftDown}
+  }
 }
 
 /*
