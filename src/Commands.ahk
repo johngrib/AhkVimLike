@@ -190,3 +190,19 @@ command_stattrans(args){
   CFG.fix_ini_value("INSERT", "trans", args[2] )
   CFG.fix_ini_value("CAPSLOCK", "trans", args[2] )
 }
+
+/*
+command_hide(args) {
+  activeWin := WinExist("A")
+  invisWins .= (invisWins ? "|" : "") . activeWin
+  WinHide ahk_id %activeWin%
+  GroupActivate All
+}
+
+command_show(args) {
+  Loop Parse, invisWins, |    
+    WinShow ahk_id %A_LoopField%
+
+  invisWins := ""
+}
+*/
