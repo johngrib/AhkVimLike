@@ -26,6 +26,15 @@ CapsLock & t::WinSet, AlwaysOnTop, Toggle, A
 return
 
 /*
+  use ^v on ms cmd.com console.
+*/
+#IfWinActive ahk_class ConsoleWindowClass 
+	^V:: 
+		SendInput {Raw}%clipboard% 
+	return 
+#IfWinActive
+
+/*
   IME check (MS Windows Korean character input mode check)
 */
 IME_CHECK(WinTitle) {
