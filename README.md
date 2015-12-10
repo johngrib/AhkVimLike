@@ -16,6 +16,7 @@ INSERT 모드일 때에는 Windows 의 기본 상태 키 맵핑을 사용할 수
 INSERT 모드에서 Capslock 을 누르거나, Esc 를 두 번 연속으로 누르면 NORMAL 모드가 됩니다.
 
 ### NORMAL to INSERT
+![INSERT](https://raw.githubusercontent.com/{user}/{user}.github.io/master/{repo}/img/stat_capslock.png)
 화면 하단에 -- NORMAL -- 상태 막대가 있다면, NORMAL 모드입니다.
 NORMAL 모드일 때에는 hjkl, "y, "p, m, ' 등 VIM 과 유사한 기능들을 Windows UI 에서 사용할 수 있고,
 : 을 입력한 이후 명령어를 작성하여 command function 을 호출할 수도 있습니다.
