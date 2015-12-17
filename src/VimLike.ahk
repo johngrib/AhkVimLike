@@ -308,13 +308,13 @@ $+SC035::Run, ".\manual.html"
   k : up
   l : right
 */
-#If GetKeyState("capslock","T") and StrLen(CMD.get_num()) < 1
+#If WinExist("avl_normal") and StrLen(CMD.get_num()) < 1
     *h:: Left
     *j:: Down
     *k:: Up
     *l:: Right
 #If
-#If GetKeyState("capslock","T") and StrLen(CMD.get_num()) > 0
+#If WinExist("avl_normal") and StrLen(CMD.get_num()) > 0
     *h:: func_hjkl_move("Left", CMD.get_num())
     *j:: func_hjkl_move("Down", CMD.get_num())
     *k:: func_hjkl_move("Up", CMD.get_num())
