@@ -4,28 +4,6 @@
   @Created  : 2015. NOV. 25
 */
 
-func_get_key_maps(){
-  ; numbers
-  command_keymap := ["$0", "$1", "$2", "$3", "$4", "$+4", "$5", "$6", "$7", "$8", "$9"] 
-
-  ; normal keys
-  command_keymap.InsertAt(1, "$a", "$b", "$c", "$d", "$e", "$f", "$g", "$i", "$m", "$n", "$o", "$p", "$q", "$r", "$s", "$t", "$u", "$v", "$w", "$x", "$y", "$z")
-  
-  ; shift 
-  command_keymap.InsertAt(1, "$+a", "$+b", "$+e", "$+i", "$+o", "$+q", "$+u", "$+v", "$+x")
-  
-  ; control
-  command_keymap.InsertAt(1,  "$^b", "$^e", "$^f", "$^q")
-
-  ; mouse accelator   [  ]  \
-  command_keymap.InsertAt(1, "$SC033")
-
-  ; ?, /, colon (+semi-colon) , single quote ( ' )
-  command_keymap.InsertAt(1, "$+SC035", "$SC035", "$SC028", "$+SC028")
-
-  return command_keymap
-}
-
 /*
   mouse move
 */
@@ -115,7 +93,11 @@ show_mode(msg){
   xx := CFG.get_value("STAT_LOC", "x")
   yy := CFG.get_value("STAT_LOC", "y")
 
-  create_gui("PANEL", set["_title"], msg, xx, yy, bg_color, font_color, trans)
+  if( WinExist("avl_normal") and mode = "NORMAL" ){
+    ControlSetText, Static1, -- %msg% --, avl_normal
+  } else {
+    create_gui("PANEL", set["_title"], msg, xx, yy, bg_color, font_color, trans) 
+  }
 }
 
 /*

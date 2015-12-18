@@ -46,23 +46,11 @@ class CmdOBJ {
     KeyWait, CapsLock
     GetKeyState, lockState, CapsLock, T)
     If(lockState = "D" && opt == "auto")  {
-      option = on
       show_mode("NORMAL")
     } else If(lockState = "D" && opt == "caps")  {
-      option = off
       show_mode("CAPSLOCK")
     } else {
-      option = off
       show_mode("INSERT")
     }
-    ; enable / disable command hot keys
-    
-    ;command_keymap := func_get_key_maps()
-    cnt := KEYS.Length()
-    Loop %cnt% {
-      target_key := KEYS[A_Index]
-      Hotkey, %target_key%, %option%
-    }
-    return
   }
 }

@@ -49,7 +49,7 @@ main(){
   STAT["INSERT"]   := CFG.get_sect("INSERT")
   STAT["CAPSLOCK"] := CFG.get_sect("CAPSLOCK")
 
-  KEYS := func_get_key_maps()
+  ;KEYS := func_get_key_maps()
   CMD  := new CmdOBJ("", "")
   AUTO_TEMP := ""
   AUTO_CNT  := 1

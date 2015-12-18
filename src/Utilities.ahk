@@ -9,7 +9,7 @@
 CapsLock & Space::Send, {VK15}
 CapsLock & t::WinSet, AlwaysOnTop, Toggle, A
 
-#If GetKeyState("capslock","T") = 0
+#If WinExist("avl_insert") or  WinExist("avl_capslock")
   ~+SC027::
     if(IME_CHECK("A"))
       Send, {VK15}    ; input Korean/English switch key
