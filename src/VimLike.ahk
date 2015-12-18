@@ -93,7 +93,6 @@ return
 
 
 #If WinExist("avl_normal")
-
   /*
     colon to input command mode
   */
@@ -323,17 +322,8 @@ return
     *l:: func_hjkl_move("Right", CMD.get_num())
 #If
 
-
 func_hjkl_move(key, ByRef cnt){
   Send {%key% %cnt%}
   CMD.set_num("")
   CMD.changeMode("auto")
 }
-
-/*
-F12::
-  ;ControlGetText, txt, Static1, avl_normal
-  ;MsgBox %txt%
-  ;ControlSetText, Static1, test, avl_normal
-return
-*/
