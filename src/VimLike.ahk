@@ -316,14 +316,15 @@ return
     *l:: Right
 #If
 #If WinExist("avl_normal") and StrLen(CMD.get_num()) > 0
-    *h:: func_hjkl_move("Left", CMD.get_num())
-    *j:: func_hjkl_move("Down", CMD.get_num())
-    *k:: func_hjkl_move("Up", CMD.get_num())
-    *l:: func_hjkl_move("Right", CMD.get_num())
+    $h:: func_hjkl_move("{Left " . CMD.get_num() . "}")
+    $j:: func_hjkl_move("{Down " . CMD.get_num() . "}")
+    $k:: func_hjkl_move("{Up " . CMD.get_num() . "}")
+    $l:: func_hjkl_move("{Right " . CMD.get_num() . "}")
 #If
 
-func_hjkl_move(key, ByRef cnt){
-  Send {%key% %cnt%}
+func_hjkl_move(key){
+  Send, %key%  
   CMD.set_num("")
-  CMD.changeMode("auto")
+  show_mode("NORMAL")
+  ;CMD.changeMode("auto")
 }
