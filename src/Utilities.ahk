@@ -16,6 +16,10 @@ CapsLock & t::WinSet, AlwaysOnTop, Toggle, A
   return
 #if
 
+#If not WinActive("ahk_class XLMAIN")
+  +Space:: Send, {VK15}    ; input Korean/English switch key
+#IF
+
 /*
   ^c -> push to clipboard register
 */
