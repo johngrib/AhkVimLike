@@ -113,6 +113,7 @@ key_za(ByRef input_number){
 }
 key_zs(ByRef input_number){
   move_window(input_number, 5, "A")
+  WinMaximize, A
 }
 key_zd(ByRef input_number){
   move_window(input_number, 6, "A")
