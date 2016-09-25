@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AhkVimLike Manual</title>
+    <style type="text/css">
+        td {
+            padding: 5px; 
+            border : 1px solid grey;
+            text-align : center;
+        }
+        #keymaps td:nth-child(3) {
+            background-color: #DDFFFF;
+        }
+        #keymaps td:nth-child(1n + 4) {
+            text-align : left;
+        }
+        #functions td:nth-child(1) {
+            background-color: #DDFFFF;
+        }
+        #functions td:nth-child(1n + 2) {
+            text-align : left;
+        }
+    </style>
+</head>
+<script>
+var keymap_attr = {id: 'keymaps'};
+var keymap_head = ['mode', 'type', 'key input', 'description', 'example']
+var keymap_content = {
+  English : [
+   ['-', 'mode change', 'Capslock', 'swap INSERT/COMMAND mode', 'Capslock' ]
+  ,['-', 'mode change', '+Capslock', 'upper case input mode', '+Capslock']
+  ,['-' ,'-' ,'Capslock & Space' ,'swap English/Korean mode' ,'Capslock & Space']
+  ,['-' ,'-' ,'Capslock & F4' ,'Exit program' ,'Capslock & F4' ]
+  ,['-' ,'-' ,'Capslock & F5' ,'Reload program' ,'Capslock & F5' ]
+  ,['NORMAL' ,'mode change' ,'(+) I' ,'insert' ,'I : insert<br> +I : insert at the beginning of the line' ]
+  ,['NORMAL' ,'mode change' ,'(+) O' ,'append a new line' ,'O : append a new line below the current line<br> +O : append a new line above the current line' ]
+  ,['NORMAL' ,'key input' ,'H' ,'Left' ,'H : Send Left Key<br> 3H : Send Left Key 3 times' ]
+  ,['NORMAL' ,'key input' ,'J' ,'Down' ,'J : Send Down Key<br> 27J : Send Down Key 27 times' ]
+  ,['NORMAL' ,'key input' ,'K' ,'Up' ,'K : Send Up Key<br> 2K : Send Up Key 2 times' ]
+  ,['NORMAL' ,'key input' ,'L' ,'Right' ,'L : Send Right Key<br> 2L : Send Right Key 2 times' ]
+  ,['NORMAL' ,'key input' ,'0' ,'Home' ,'0' ]
+  ,['NORMAL' ,'key input' ,'+4' ,'End : $' ,'+4' ]
+  ,['NORMAL' ,'key input' ,'^B' ,'Page Up' ,'^B : Page Up <br> 300^B : Send Page Up key 300 times' ]
+  ,['NORMAL' ,'key input' ,'^F' ,'Page Down' ,'^F : Page Down <br> 4^F : Send Page Down key 4 times' ]
+  ,['NORMAL' ,'key input' ,'(+) X' ,'Delete' ,'X : do nothing. Just press X to delete is dangerous.<br> 1X : Send Delete Key<br> 10X : Send Delete Key 10 times<br> +X : Send BackSpace<br> 7+X : Send BackSpace 7 times' ]
+  ,['NORMAL' ,'mouse input' ,'(^ +) Q' ,'Left Button of Mouse' ,'Q : Click left <br> ^Q : Click left hold<br> +Q : unhold<br> 100Q : Click left 100 times' ]
+  ,['NORMAL' ,'mouse input' ,'(^ +) E' ,'Right Button of Mouse' ,'E : Click right<br> ^E : Click right hold<br> +E : unhold<br> 10E : Click right 10 times ' ]
+  ,['NORMAL' ,'mouse input' ,'R' ,'Wheel up' ,'R : Wheel up<br> 5R : Wheel up 5 times ' ]
+  ,['NORMAL' ,'mouse input' ,'F' ,'Wheel down' ,'F : Wheel up<br> 50F : Wheel down 50 times ' ]
+  ,['NORMAL' ,'mouse move' ,'[' ,'move mouse pointer 400 pixel' ,'' ]
+  ,['NORMAL' ,'mouse move' ,']' ,'move mouse pointer 10 pixel' ,'' ]
+  ,['NORMAL' ,'mouse move' ,'\\' ,'move mouse pointer 1 pixel' ,'' ]
+  ,['NORMAL' ,'mouse move' ,'([ ] \) W' ,'move mouse pointer up' ,'W : move mouse pointer up (70 pixel)<br> 3W : move m-pointer up 3times (70*3 pixel) <br> [ & W : move m-pointer up (400 pixel)<br> ] & W : move m-pointer up (10 pixel)<br> \ & W : move m-pointer up (1 pixel)<br> 30 \ & W : move m-pixel up (30 pixel) ' ]
+  ,['NORMAL' ,'mouse move' ,'([ ] \) A' ,'move mouse pointer left' ,'like W' ]
+  ,['NORMAL' ,'mouse move' ,'([ ] \) S' ,'move mouse pointer Down' ,'like W' ]
+  ,['NORMAL' ,'mouse move' ,'([ ] \) D' ,'move mouse pointer Right' ,'like W' ]
+  ,['NORMAL' ,'mouse move' ,'gq' ,'move mouse pointer to top left <br>of active window' ,'gq' ]
+  ,['NORMAL' ,'mouse move' ,'gw' ,'move mouse pointer to top center <br>of active window' ,'gw' ]
+  ,['NORMAL' ,'mouse move' ,'ge' ,'move mouse pointer to top right <br>of active window' ,'ge' ]
+  ,['NORMAL' ,'mouse move' ,'ga' ,'move mouse pointer to middle left <br>of active window' ,'ga' ]
+  ,['NORMAL' ,'mouse move' ,'gs' ,'move mouse pointer to middle center <br>of active window' ,'gs' ]
+  ,['NORMAL' ,'mouse move' ,'gd' ,'move mouse pointer to middle right <br>of active window' ,'gd' ]
+  ,['NORMAL' ,'mouse move' ,'gz' ,'move mouse pointer to bottom left <br>of active window' ,'gz' ]
+  ,['NORMAL' ,'mouse move' ,'gx' ,'move mouse pointer to bottom center <br>of active window' ,'gx' ]
+  ,['NORMAL' ,'mouse move' ,'gc' ,'move mouse pointer to bottom right <br>of active window' ,'gc' ]
+  ,['NORMAL' ,'window control' ,'m\d ( 0 ~ 9 )' ,'mark window' ,'m0 : bookmark activated window to number 0<br> m1 : bookmark activated window to number 1<br> ...<br> m9 : bookmark activated window to number 9<br> (view all bookmarks :mark function) ' ]
+  ,['NORMAL' ,'window control' ,'\'\d ( 0 ~ 9 )' ,'go to marked window' ,'\'0 : activate 0 bookmarked window<br> \'1 : activate 1 bookmarked window<br> ...<br> \'9 : activate 9 bookmarked window<br> (view all bookmarks :mark function) ' ]
+  ,['NORMAL' ,'window control' ,'Capslock & t' ,'always on top this active window. (toggle)' ,'Capslock & t' ]
+  ,['NORMAL' ,'window control' ,'(\d) zq' ,'move activated window to top left' ,'zq : move activated window to top left of screen<br> 1zq : move activated window to top left of 1st monitor screen<br> 2zq : move activated window to top left of 2nd monitor screen<br> 3zq : move activated window to top left of 3rd monitor screen<br> ...<br> \dzq : move activated window to top left of \dth monitor screen ' ]
+  ,['NORMAL' ,'window control' ,'zw' ,'move activated window to top center' ,'like zq' ]
+  ,['NORMAL' ,'window control' ,'ze' ,'move activated window to top right' ,'like zq' ]
+  ,['NORMAL' ,'window control' ,'za' ,'move activated window to middle left' ,'like zq' ]
+  ,['NORMAL' ,'window control' ,'zs' ,'move activated window to middle center(maximize)' ,'like zq' ]
+  ,['NORMAL' ,'window control' ,'zd' ,'move activated window to middle right' ,'like zq' ]
+  ,['NORMAL' ,'window control' ,'zz' ,'move activated window to bottom left' ,'like zq' ]
+  ,['NORMAL' ,'window control' ,'zx' ,'move activated window to bottom center' ,'like zq' ]
+  ,['NORMAL' ,'window control' ,'zc' ,'move activated window to bottom right' ,'like zq' ]
+  ,['NORMAL' ,'clipboard control' ,'^c' ,'normaly ctrl + c.<br> but clipboard data will push to "register 0" of AhkVimlike.<br> register saves 30 clipboard history.' ,'^c' ]
+  ,['NORMAL' ,'clipboard control' ,'"y' ,'copy to AhkVimlike register.<br>There are 52 registers in AhkVimlike.<br> (0~29, a~z. but hjkl is not registers)<br>number registers are clipboard history.' ,'"3y : copy to "register 3"<br>"ay : copy to "register a"<br>(view all registers :reg function)' ]
+]
+  , Korean : [
+   ['-', '모드 변환', 'Capslock', 'INSERT/NORMAL 모드를 변환한다', 'Capslock' ]
+  ,['-', '모드 변환', '+Capslock', '대문자 입력 모드', '+Capslock']
+  ,['-' ,'-' ,'Capslock & Space' ,'영문/한글 전환' ,'Capslock & Space']
+  ,['-' ,'-' ,'Capslock & F4' ,'AhkVimLike 프로그램 종료' ,'Capslock & F4' ]
+  ,['-' ,'-' ,'Capslock & F5' ,'AhkVimLike 프로그램 재 실행' ,'Capslock & F5' ]
+  ,['NORMAL' ,'모드 변환' ,'(+) I' ,'입력 모드로 전환' ,'I : 입력 모드로 전환<br> +I : 입력 모드로 전환한 다음, 편집중인 라인의 첫째 글자로 이동.' ]
+  ,['NORMAL' ,'모드 변환' ,'(+) O' ,'새로운 라인 추가' ,'O : 입력 모드로 전환하고 아랫줄을 추가한다.<br> +O : 입력 모드로 전환하고 윗줄을 추가한다.' ]
+  ,['NORMAL' ,'키 입력' ,'H' ,'Left' ,'H : Left 방향키<br> 3H : Left 방향키를 3 번 입력한다.' ]
+  ,['NORMAL' ,'키 입력' ,'J' ,'Down' ,'J : Down 방향키<br> 27J : Down 방향키를 27 번 입력한다.' ]
+  ,['NORMAL' ,'키 입력' ,'K' ,'Up' ,'K : Up 방향키<br> 2K : Up 방향키를 2 번 입력한다.' ]
+  ,['NORMAL' ,'키 입력' ,'L' ,'Right' ,'L : Right 방향키<br> 2L : Right 방향키를 2 번 입력한다.' ]
+  ,['NORMAL' ,'키 입력' ,'0' ,'Home' ,'0' ]
+  ,['NORMAL' ,'키 입력' ,'+4' ,'End : $' ,'+4' ]
+  ,['NORMAL' ,'키 입력' ,'^B' ,'Page Up' ,'^B : Page Up <br> 300^B : Page Up 키를 300 번 입력한다.' ]
+  ,['NORMAL' ,'키 입력' ,'^F' ,'Page Down' ,'^F : Page Down <br> 4^F : Page Down 키를 4 번 입력한다.' ]
+  ,['NORMAL' ,'키 입력' ,'(+) X' ,'Delete' ,'X : 아무것도 하지 않는다. X 만 입력하여 삭제가 되면 위험하기 때문.<br> 1X : Delete Key 를 1 번 입력한다.<br> 10X : Delete Key 를 10 번 입력한다.<br> +X : BackSpace 키를 입력한다.<br> 7+X : BackSpace 키를 7 번 입력한다.' ]
+  ,['NORMAL' ,'마우스 입력' ,'(^ +) Q' ,'마우스 왼쪽 버튼' ,'Q : 클릭 <br> ^Q : 클릭한 상태로 홀드(이 상태에서 움직이면 드래그가 된다.)<br> +Q : 홀드 상태 해제<br> 100Q : 마우스 왼쪽 버튼을 100 번 입력한다.(100 번 클릭한다.)' ]
+  ,['NORMAL' ,'마우스 입력' ,'(^ +) E' ,'마우스 오른쪽 버튼' ,'E : 우클릭<br> ^E : 우클릭 홀드<br> +E : 홀드 상태 해제<br> 10E : 마우스 오른쪽 버튼을 10번 입력한다.(10번 우클릭한다.)' ]
+  ,['NORMAL' ,'마우스 입력' ,'R' ,'마우스 휠(위)' ,'R : 휠을 위로 굴린다.<br> 5R : 휠을 5 번 위로 굴린다.' ]
+  ,['NORMAL' ,'마우스 입력' ,'F' ,'마우스 휠(아래)' ,'F : 휠을 아래로 굴린다.<br> 50F : 휠을 50 번 아래로 굴린다.' ]
+  ,['NORMAL' ,'마우스 이동' ,'[' ,'마우스 포인터를 400 픽셀만큼 이동한다.' ,'(조합으로만 사용)' ]
+  ,['NORMAL' ,'마우스 이동' ,']' ,'마우스 포인터를 10 픽셀만큼 이동한다.' ,'(조합으로만 사용)' ]
+  ,['NORMAL' ,'마우스 이동' ,'\\' ,'마우스 포인터를 1 픽셀만큼 이동한다.' ,'(조합으로만 사용)' ]
+  ,['NORMAL' ,'마우스 이동' ,'([ ] \\) W' ,'마우스 포인터를 위로 이동한다.' ,'W : 마우스 포인터를 위로 이동한다. (70 픽셀만큼) <br> 3W : 마우스 포인터를 위로 세 번 이동한다. (70*3 픽셀) <br> [ & W : 마우스 포인터를 위로 멀리 이동한다. (400 픽셀) <br> ] & W : 마우스 포인터를 위로 짧게 이동한다. (10 픽셀) <br> \ & W : 마우스 포인터를 위로 약간 이동한다. (1 픽셀) <br> 30 \ & W : 마우스 포인터를 위로 약간 30 번 이동한다. (30 픽셀) ' ]
+  ,['NORMAL' ,'마우스 이동' ,'([ ] \\) A' ,'마우스 포인터를 왼쪽으로 움직인다.' ,'W 와 비슷하게 사용하면 된다.' ]
+  ,['NORMAL' ,'마우스 이동' ,'([ ] \\) S' ,'마우스 포인터를 아래로 움직인다.' ,'W 와 비슷하게 사용하면 된다.' ]
+  ,['NORMAL' ,'마우스 이동' ,'([ ] \\) D' ,'마우스 포인터를 오른쪽으로 움직인다.' ,'W 와 비슷하게 사용하면 된다.' ]
+  ,['NORMAL' ,'마우스 이동' ,'gq' ,'마우스 포인터를 현재 윈도우의<br> 상단 왼쪽 구석으로 이동시킨다.' ,'gq' ]
+  ,['NORMAL' ,'마우스 이동' ,'gw' ,'마우스 포인터를 현재 윈도우의<br> 상단 가운데 구석으로 이동시킨다.' ,'gw' ]
+  ,['NORMAL' ,'마우스 이동' ,'ge' ,'마우스 포인터를 현재 윈도우의<br> 상단 오른쪽 구석으로 이동시킨다.' ,'ge' ]
+  ,['NORMAL' ,'마우스 이동' ,'ga' ,'마우스 포인터를 현재 윈도우의<br> 중단 왼쪽 구석으로 이동시킨다.' ,'ga' ]
+  ,['NORMAL' ,'마우스 이동' ,'gs' ,'마우스 포인터를 현재 윈도우의<br> 중단 가운데 구석으로 이동시킨다.' ,'gs' ]
+  ,['NORMAL' ,'마우스 이동' ,'gd' ,'마우스 포인터를 현재 윈도우의<br> 중단 오른쪽 구석으로 이동시킨다.' ,'gd' ]
+  ,['NORMAL' ,'마우스 이동' ,'gz' ,'마우스 포인터를 현재 윈도우의<br> 하단 왼쪽 구석으로 이동시킨다.' ,'gz' ]
+  ,['NORMAL' ,'마우스 이동' ,'gx' ,'마우스 포인터를 현재 윈도우의<br> 하단 가운데 구석으로 이동시킨다.' ,'gx' ]
+  ,['NORMAL' ,'마우스 이동' ,'gc' ,'마우스 포인터를 현재 윈도우의<br> 하단 오른쪽 구석으로 이동시킨다.' ,'gc' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'m\\d ( 0 ~ 9 )' ,'윈도우를 북마크한다.' ,'m0 : 현재 윈도우를 0 번으로 마크한다.<br> m1 : 현재 윈도우를 1 번으로 마크한다.<br> ...<br> m9 : 현재 윈도우를 9 번으로 마크한다.<br> (:mark 명령어를 사용하면 모든 북마크를 확인할 수 있다.) ' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'\'\\d ( 0 ~ 9 )' ,'북마크한 윈도우로 이동한다.' ,'\'0 : 0 번 윈도우로 이동한다.<br> \'1 : 1 번 윈도우로 이동한다.<br> ...<br> \'9 : 9 번 윈도우로 이동한다.<br> (:mark 명령어를 사용하면 모든 북마크를 확인할 수 있다.) ' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'Capslock & t' ,'현재 창이 항상 위쪽에 있게 한다(다른 창에 가려지지 않음).<br>입력할 때마다 위쪽/해제 가 토글된다.' ,'Capslock & t' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'(\\d) zq' ,'윈도우를 (\\d 번) 모니터의 화면의 상단 왼쪽으로 이동한다.' ,'zq : 윈도우를 화면의 상단 왼쪽으로 이동한다.<br> 1zq : 윈도우를 1 번 모니터의 상단 왼쪽으로 이동한다. <br> 2zq : 윈도우를 2 번 모니터의 상단 왼쪽으로 이동한다.<br> 3zq : 윈도우를 3 번 모니터의 상단 왼쪽으로 이동한다.<br> ...<br> \\dzq : 윈도우를 \\d 번 모니터의 상단 왼쪽으로 이동한다.' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'zw' ,'윈도우를 화면의 상단 가운데로 이동한다.' ,'zq 와 비슷하다.' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'ze' ,'윈도우를 화면의 상단 오른쪽으로 이동한다.' ,'zq 와 비슷하다.' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'za' ,'윈도우를 화면의 중단 왼쪽으로 이동한다.' ,'zq 와 비슷하다.' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'zs' ,'윈도우를 화면의 중단 가운데로 이동한다.(최대화)' ,'zq 와 비슷하다.' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'zd' ,'윈도우를 화면의 중단 오른쪽으로 이동한다.' ,'zq 와 비슷하다.' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'zz' ,'윈도우를 화면의 하단 왼쪽으로 이동한다.' ,'zq 와 비슷하다.' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'zx' ,'윈도우를 화면의 하단 가운데로 이동한다.' ,'zq 와 비슷하다.' ]
+  ,['NORMAL' ,'윈도우 컨트롤' ,'zc' ,'윈도우를 화면의 하단 오른쪽으로 이동한다.' ,'zq 와 비슷하다.' ]
+  ,['NORMAL' ,'클립보드 컨트롤' ,'^c' ,'평범한 ctrl + c 와 같지만, <br>복사할 때마다 AhkVimLike 의 0 번 레지스터에 저장된다. <br>클립보드 히스토리는 30 개 까지 보관된다.' ,'^c' ]
+  ,['NORMAL' ,'클립보드 컨트롤' ,'"y' ,'레지스터로 복사한다. <br>레지스터는 0~29, a~z (hjkl 제외) 전부 52 개가 존재하며<br>숫자는 히스토리이므로 복사할 때마다 하나씩 밀려난다.<br> 알파벳은 사용자 임의로 입력하고 꺼내 쓰면 된다.' ,'"3y : 3번 레지스터로 복사한다.<br>"ay : a 레지스터로 복사한다.<br>(:reg 명령을 사용하면 레지스터 목록을 볼 수 있다.)' ]
+  ,['NORMAL' ,'클립보드 컨트롤' ,'"p' ,'레지스터에서 가져와 붙여넣는다.<br>' ,'"3p : 3번 레지스터 값을 붙여넣는다.<br>"ap : a 레지스터 값을 붙여넣는다.<br>(:reg 명령을 사용하면 레지스터 목록을 볼 수 있다.)' ]
+  ,['NORMAL' ,'클립보드 컨트롤' ,'(\\d)p' ,'0 번 레지스터 값을 가져와 붙여넣는다. ctrl + v 와 같다.<br>' ,'p : ctrl + v 를 입력한다.<br>5p : ctrl + v 를 5 번 입력한다.<br>100p : ctrl + v 를 100 번 입력한다.' ]
+  ]
+}
+
+var functions_attr = {id: 'functions'};
+var functions_head = ['function name', 'description', 'example']
+var functions_content = { 
+  English : [
+  ['min', 'minimize active window', 'min&lt;ENTER&gt;']
+  ,['max' ,'maximize active window' ,':max&lt;ENTER&gt;' ]
+  ,['w' ,'send ctrl + s' ,':w&lt;ENTER&gt;' ]
+  ,['trans' ,'adjust invisibility of active window. (0 ~ 255)' ,':trans&lt;ENTER&gt;<br> :trans 0&lt;ENTER&gt;<br> :trans 255&lt;ENTER&gt; ' ]
+  ,['notrans' ,'reset invisibility of active window to 255' ,':notrans&lt;ENTER&gt; ' ]
+  ,['kill' ,'kill the process of active window' ,':kill&lt;ENTER&gt;' ]
+  ,['color' ,'get rgb value of point at mouse pointer and input to clipboard' ,':color&lt;ENTER&gt;' ]
+  ,['mark' ,'show list of marked window\'s name' ,':mark&lt;ENTER&gt;' ]
+  ,['edit' ,'edit script' ,':edit&lt;ENTER&gt;' ]
+  ,['log' ,'show key log' ,':log&lt;ENTER&gt;' ]
+  ,['hotkey' ,'show list of hot keys' ,':hotkey&lt;ENTER&gt;' ]
+  ,['title' ,'get title text of activated window' ,':title&lt;ENTER&gt;' ]
+  ,['time' ,'get time text' ,':time&lt;ENTER&gt; : get time text of now<br> :time date&lt;ENTER&gt; : get date text of today<br> :time [format] : get formatted date/time text<br> <br> :time help : open Date/time Format document ' ]
+  ]
+  ,Korean : [ 
+  ['color' ,'마우스 포인터가 있는 곳의 RGB 컬러 값을 조사한다.' ,':color&lt;ENTER&gt;' ]
+  ,['edit' ,'스크립트를 편집한다.' ,':edit&lt;ENTER&gt;' ]
+  ,['hotkey' ,'핫 키 목록을 본다.' ,':hotkey&lt;ENTER&gt;' ]
+  ,['kill' ,'윈도우 프로세스를 강제 종료한다.' ,':kill&lt;ENTER&gt;' ]
+  ,['log' ,'키 로그를 본다.' ,':log&lt;ENTER&gt;' ]
+  ,['mark' ,'북마크된 윈도우의 목록을 본다.' ,':mark&lt;ENTER&gt;' ]
+  ,['max' ,'윈도우를 최대화한다.' ,':max&lt;ENTER&gt;' ]
+  ,['min', '윈도우를 최소화한다.', ':min&lt;ENTER&gt;']
+  ,['op', 'ahkvimlike.ini 파일의 OP_ADDRESS 에 정의한 주소 명령을 실행한다.', ':op doc&lt;ENTER&gt; : 내 문서 폴더를 연다.<br>:op inetcpl&lt;ENTER&gt; : 인터넷 옵션을 연다.<br>:op google&lt;ENTER&gt; : google.com 에 접속한다.']
+  ,['reg', '레지스터 목록을 본다.', ':reg&lt;ENTER&gt;']
+  ,['time' ,'날짜/시간 문자열을 리턴한다.' ,':time&lt;ENTER&gt; : 현재 날짜/시간 문자열.<br> :time date&lt;ENTER&gt; : 오늘 날짜 문자열.<br> :time [format] : 지금 시간을 입력한 포맷으로 리턴한다.<br> <br> :time help : 날짜/시간 포맷 도움말 보기.' ]
+  ,['title' ,'윈도우의 타이틀 문자열을 리턴한다.' ,':title&lt;ENTER&gt;' ]
+  ,['trans' ,'윈도우의 투명도를 설정한다. (0 ~ 255)' ,':trans&lt;ENTER&gt;<br> :trans 0&lt;ENTER&gt; : 완전 투명 (안 보임)<br> :trans 255&lt;ENTER&gt; : 불투명' ]
+  ,['notrans' ,'윈도우의 투명도를 255 로 복구한다.' ,':notrans&lt;ENTER&gt; ' ]
+  ,['w' ,'ctrl + s 를 입력한다.' ,':w&lt;ENTER&gt;' ]
+  ]
+}
+</script>
+<body>
+    <div>
+        <h1>AhkVimLike	Version 3.0</h1>
+        <h2>by <a href="mailto:johngrib82@gmail.com" target="_top">johngrib82@gmail.com</a> </h2>
+        <h2>
+            <a href="https://github.com/johngrib/AhkVimLike">Github repository</a>
+        </h2>
+    </div>
+    <div>
+        <select onchange="change_lang(this.value)">
+          <option value='Korean'>Korean</option>
+          <option value='English'>English</option>
+        </select>
+    </div>
+    <div>
+        <h3> MEANINGS </h3>
+        <ul>
+            <li> ^ : Control key </li>
+            <li> + : Shift key </li>
+            <li> & : press first key then press second key <br>
+                 exam) a & b : press and hold A, then press B
+            </li>
+            <li> \d : a number</li>
+        </ul>
+    </div>
+    <h3> KEY MAPS </h3>
+    <div id = 'key_div'> </div>
+    <h3> : FUNCTIONS</h3>
+    <h4>in command mode, type ":" and input function name </h4>
+    <div id = 'func_div'> </div>
+
+</body>
+<script>
+/* polyfill */
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+// Production steps of ECMA-262, Edition 5, 15.4.4.18
+// Reference: http://es5.github.io/#x15.4.4.18
+if (!Array.prototype.forEach) {
+  Array.prototype.forEach = function(callback, thisArg) {
+    var T, k;
+    if (this == null) {
+      throw new TypeError(' this is null or not defined');
+    }
+    var O = Object(this);
+    var len = O.length >>> 0;
+    if (typeof callback !== "function") {
+      throw new TypeError(callback + ' is not a function');
+    }
+    if (arguments.length > 1) {
+      T = thisArg;
+    }
+    k = 0;
+    while (k < len) {
+      var kValue;
+      if (k in O) {
+        kValue = O[k];
+        callback.call(T, kValue, k, O);
+      }
+      k++;
+    }
+  };
+}
+</script>
+<script>
+
+['table', 'thead', 'tbody', 'th', 'tr', 'td'].forEach(function(v){
+    window['create_' + v] = create_el(v);
+});
+
+//init("English");
+init("Korean");
+
+function create_el(tag){ 
+  return function(attr){ 
+    var e = document.createElement(tag)
+    for (k in attr)
+      e.setAttribute(k, attr[k]);
+    return e; 
+  }; 
+}
+
+function init(lang){
+  var keymap_table = create_table_proc(keymap_attr, keymap_head, keymap_content, lang);
+  document.getElementById('key_div').appendChild( keymap_table );
+  var func_table = create_table_proc(functions_attr, functions_head, functions_content, lang);
+  document.getElementById('func_div').appendChild( func_table );
+}
+
+function change_lang(lang){
+	document.getElementById('key_div').innerHTML = ""
+	document.getElementById('func_div').innerHTML = ""
+    init(lang);
+}
+
+function create_table_proc(attr, header, content, lang){
+
+  table = create_table(attr);
+  thead = create_thead();
+  tbody = create_tbody();
+  
+  header.forEach(function(v){
+    var th = create_th()
+    th.innerHTML = v;
+    thead.appendChild(th);
+  })
+
+  content[lang].forEach(function(row){
+    var tr = create_tr()
+    tbody.appendChild(tr)
+    row.forEach(function(col){
+      var td = create_td();
+      td.innerHTML = col
+      tr.appendChild(td)
+    });
+  });
+
+  table.appendChild( thead );
+  table.appendChild( tbody );
+
+  for (k in attr) {
+    table.setAttribute(k, attr[k]);
+  }
+
+  return table;
+}
+
+</script>
+</html>
